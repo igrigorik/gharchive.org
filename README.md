@@ -33,7 +33,7 @@ GitHub provides 17 event types, which range from new commits and fork events, to
 </tbody>
 </table>
 
-Each archive contains a stream of JSON encoded GitHub events ([sample](https://gist.github.com/2017462), which you can process in any language. Ruby example:
+Each archive contains a stream of JSON encoded GitHub events ([sample](https://gist.github.com/2017462)), which you can process in any language. Ruby example:
 
 ```ruby
 require 'open-uri'
