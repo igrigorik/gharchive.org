@@ -37,7 +37,7 @@ EM.run do
   Signal.trap("INT",  &stop)
   Signal.trap("TERM", &stop)
 
-  @file_generator = lambda { File.new("data/#{Time.now.strftime('%Y-%m-%d-%k')}.json.current", "a+") }
+  @file_generator = lambda { File.new("data/#{Time.now.strftime('%Y-%m-%d-%-k')}.json.current", "a+") }
   @file = @file_generator.call
 
   # set the hourly timer to fire on the hour
