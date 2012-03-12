@@ -33,6 +33,10 @@ GitHub provides 17 event types, which range from new commits and fork events, to
 </tbody>
 </table>
 
+__Note: timeline data is available starting March 11, 2012.__
+
+----
+
 Each archive contains a stream of JSON encoded GitHub events ([sample](https://gist.github.com/2017462)), which you can process in any language. Ruby example:
 
 ```ruby
@@ -48,7 +52,22 @@ Yajl::Parser.parse(js) do |event|
 end
 ```
 
-__Note: timeline data is available starting March 11, 2012.__
+----
+
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>Projects using GitHub Archive data</th>
+    <th>Link</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><i>your project here</i></td>
+    <td><i><a href="https://github.com/igrigorik/githubarchive.org">fork and update</a></i></td>
+  </tr>
+</tbody>
+</table>
 
 ### License
 
