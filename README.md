@@ -4,7 +4,7 @@
 
 Open-source developers all over the world are working on millions of projects: writing code & documentation, fixing & submitting bugs, and so forth. GitHub Archive is a project to **record** the public GitHub timeline, **archive it**, and **make it easily accessible for** further analysis.
 
-![Stats](http://www.stathat.com/graphs/1d/97/2c57ce23e5bfcd3d5ffc822b587f.png)
+![Stats](http://www.stathat.com/graphs/78/4b/ec2e823eb47680c42914a0f9b1f6.png)
 
 ----
 
