@@ -19,11 +19,11 @@ GitHub provides 17 event types, which range from new commits and fork events, to
 </thead>
 <tbody>
   <tr>
-    <td>Activity for March 03, 2012 at 3PM PST</td>
+    <td>Activity for March 11, 2012 at 3PM PST</td>
     <td><code>wget http://data.githubarchive.org/2012-03-11-15.json.gz</code></td>
   </tr>
   <tr>
-    <td>Activity for March 03, 2012</td>
+    <td>Activity for March 11, 2012</td>
     <td><code>wget http://data.githubarchive.org/2012-03-11-{0..24}.json.gz</code></td>
   </tr>
   <tr>
