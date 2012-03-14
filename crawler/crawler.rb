@@ -57,7 +57,7 @@ EM.run do
   end
 
   process = Proc.new do
-      req = HttpRequest.new("https://github.com/timeline.json").get({
+      req = HttpRequest.new("https://api.github.com/events").get({
       :head => {
         'user-agent' => 'archiver.io'
       }
