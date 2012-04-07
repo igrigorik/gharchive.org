@@ -83,7 +83,7 @@ EM.run do
 
       rescue Exception => e
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
-	@log.error "Response: #{req.response_header}, #{req.response}"
+        @log.error "Response: #{req.response_header}, #{req.response}"
       end
     end
 

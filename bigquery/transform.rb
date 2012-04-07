@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'optparse'
 require 'time'
 require 'zlib'
@@ -43,10 +45,11 @@ end
 
 start = Time.now
 schema = Yajl::Parser.parse(open(options[:schema]).read)
-headers = schema['configuration']['load']['schema']['fields'].map {|f| f['name']}
+headers = schema.map {|f| f['name']}
 
 begin
-  out = File.new(options[:output] || (options[:input] + "-out.csv"), "w")
+  out = File.new(options[:output] || (options[:input] + "-out.csv.gz"), "w")
+  ogz = Zlib::GzipWriter.new(out)
   js  = Zlib::GzipReader.new(open(options[:input])).read
   cnt = 0
 
@@ -61,11 +64,13 @@ begin
       end
     end
 
+    raise "Record <> schema mismatch: #{r.size}, #{schema.size}. Exiting." if r.size != schema.size
+
     cnt += 1
-    out << r.to_s
+    ogz.write r.to_s.encode('ascii', 'binary', :invalid => :replace, :undef => :replace, :replace => '')
   end
 
   puts "Processed #{options[:input]}: #{cnt} rows in #{(Time.now - start).round} seconds"
 ensure
-  out.close
+  ogz.close
 end
