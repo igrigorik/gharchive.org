@@ -6,7 +6,7 @@ require 'zlib'
 require 'yajl'
 require 'csv'
 
-options = {schema: 'schema.js', verbose: false}
+options = {schema: 'schema.js', verbose: false, compress: true}
 OptionParser.new do |opts|
   opts.banner = "Usage: flatten.rb [options]"
 
@@ -18,12 +18,16 @@ OptionParser.new do |opts|
     options[:output] = v
   end
 
-  opts.on("-s", "--schema FILE", "schema file") do |v|
+  opts.on("-s", "--schema FILE", "schema file (default: schema.js)") do |v|
     options[:schema] = v
   end
 
-  opts.on("-v", "--verbose", "verbose log") do |v|
-    options[:verbose] = true
+  opts.on("-c", "--[no-]compress", "compress output") do |v|
+    options[:compress] = v
+  end
+
+  opts.on("-v", "--verbose", "verbose log (default: false)") do |v|
+    options[:verbose] = v
   end
 end.parse!
 
@@ -48,8 +52,11 @@ schema = Yajl::Parser.parse(open(options[:schema]).read)
 headers = schema.map {|f| f['name']}
 
 begin
-  out = File.new(options[:output] || (options[:input] + "-out.csv.gz"), "w")
-  ogz = Zlib::GzipWriter.new(out)
+  options[:output] ||= options[:input] + "-out.csv"
+  options[:output] += '.gz' if options[:compress]
+
+  out = File.new(options[:output], "w")
+  out = Zlib::GzipWriter.new(out) if options[:compress]
   js  = Zlib::GzipReader.new(open(options[:input])).read
   cnt = 0
 
@@ -67,10 +74,10 @@ begin
     raise "Record <> schema mismatch: #{r.size}, #{schema.size}. Exiting." if r.size != schema.size
 
     cnt += 1
-    ogz.write r.to_s.encode('ascii', 'binary', :invalid => :replace, :undef => :replace, :replace => '')
+    out.write r.to_s
   end
 
   puts "Processed #{options[:input]}: #{cnt} rows in #{(Time.now - start).round} seconds"
 ensure
-  ogz.close
+  out.close
 end
