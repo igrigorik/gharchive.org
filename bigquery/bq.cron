@@ -1,0 +1,1 @@
+5 * * * * /bin/bash -l -c 'wget -P /tmp http://data.githubarchive.org/`date +"\%Y-\%m-\%d-\%k" -d "1 hour ago"`.json.gz && cd /home/archiver/githubarchive/bigquery && ruby sync.rb -f /tmp/`date +"\%Y-\%m-\%d-\%k" -d "1 hour ago"`.json.gz --no-sync' > /var/log/bigquery.log 2>&1
