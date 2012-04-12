@@ -8,7 +8,7 @@ Open-source developers all over the world are working on millions of projects: w
 
 ----
 
-GitHub provides 17 event types, which range from new commits and fork events, to opening new tickets, commenting, and adding members to a project. The activity is aggregated in hourly archives, which you can access with any HTTP client:
+GitHub provides [18 event types](http://developer.github.com/v3/events/types/), which range from new commits and fork events, to opening new tickets, commenting, and adding members to a project. The activity is aggregated in hourly archives, which you can access with any HTTP client:
 
 <table>
 <thead>
