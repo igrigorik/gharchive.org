@@ -25,8 +25,10 @@ r = system("ruby transform.rb -i #{options[:file]} -o /tmp/bq.csv #{'-v' if opti
 exit(1) if !r
 
 # upload the data to BigQuery
-puts system(`which bq`.chomp + " #{'--nosync' if !options[:sync]} " +
-			"#{'--apilog true' if options[:verbose]} " +
-			"load github.events /tmp/bq.csv.gz")
+system("/usr/local/bin/bq ls") # refresh token
+system("/usr/local/bin/bq #{'--nosync' if !options[:sync]} " +
+       "#{'--apilog true' if options[:verbose]} " +
+       "load github.events /tmp/bq.csv.gz")
 
-puts system("rm /tmp/bq.csv.gz")
+File.unlink("/tmp/bq.csv.gz")
+File.unlink(options[:file])
