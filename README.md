@@ -24,11 +24,11 @@ GitHub provides [18 event types](http://developer.github.com/v3/events/types/), 
   </tr>
   <tr>
     <td>Activity for March 11, 2012</td>
-    <td><code>wget http://data.githubarchive.org/2012-03-11-{0..24}.json.gz</code></td>
+    <td><code>wget http://data.githubarchive.org/2012-03-11-{0..23}.json.gz</code></td>
   </tr>
   <tr>
     <td>Activity for March 2012</td>
-    <td><code>wget http://data.githubarchive.org/2012-03-{0..30}-{0..24}.json.gz</code></td>
+    <td><code>wget http://data.githubarchive.org/2012-03-{01..31}-{0..23}.json.gz</code></td>
   </tr>
 </tbody>
 </table>
@@ -51,23 +51,6 @@ Yajl::Parser.parse(js) do |event|
   print event
 end
 ```
-
-----
-
-<table class="table table-striped">
-<thead>
-  <tr>
-    <th>Projects using GitHub Archive data</th>
-    <th>Link</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><i>your project here</i></td>
-    <td><i><a href="https://github.com/igrigorik/githubarchive.org">fork and update</a></i></td>
-  </tr>
-</tbody>
-</table>
 
 ### License
 

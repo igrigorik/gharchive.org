@@ -8,9 +8,27 @@ The Github Activity stream is automatically uploaded to BigQuery sevice to enabl
 
 ```sql
 /* count the number of events by type */
-SELECT type, count(type) as total FROM github.events group by type order by total desc;
+SELECT type, count(type) as total
+	FROM github.events
+	GROUP BY type
+	ORDER BY total desc;
 
 /* find the most watched repositories */
-select repository_name, count(repository_name) as new_watchers from github.events where type = "WatchEvent" group by repository_name order by new_watchers desc;
+SELECT repository_name, count(repository_name) as new_watchers
+	FROM github.events
+	WHERE type = "WatchEvent"
+	GROUP BY repository_name
+	ORDER BY new_watchers desc;
+```
 
+For full schema of available fields to select, order, and group by, see schema.js.
+
+## Manually loading the data
+
+If you want to load the archive data into your own BigQuery project:
+
+```bash
+$> wget http://data.githubarchive.org/2012-03-11-15.json.gz
+$> ruby transform.rb -i 2012-03-11-15.json.gz
+$> python bq.py --apilog true load github.events 2012-03-11-15.json.gz-out.csv.gz schema.js
 ```
