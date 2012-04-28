@@ -49,6 +49,17 @@ def flatmap(h, e, prefix = '')
   h
 end
 
+def save(row, event, opt)
+  flatmap({}, event).each do |k,v|
+    v = (Time.parse(v).utc.strftime('%Y-%m-%d %T') rescue '') if k =~ /_at$/
+    if row.include? k
+      row[k] = v
+    else
+      puts "Unknown field: #{k}, value: #{v}" if opt[:verbose]
+    end
+  end
+end
+
 start = Time.now
 schema = Yajl::Parser.parse(open(options[:schema]).read)
 headers = schema.map {|f| f['name']}
@@ -64,13 +75,33 @@ begin
 
   Yajl::Parser.parse(js) do |event|
     r = CSV::Row.new(headers, [])
-    flatmap({}, event).each do |k,v|
-      v = (Time.parse(v).utc.strftime('%Y-%m-%d %T') rescue '') if k =~ /_at$/
-      if r.include? k
-        r[k] = v
-      else
-        puts "Unknown field: #{k}, value: #{v}" if options[:verbose]
+
+    case event['type']
+    when 'PushEvent'
+      num = event['payload'].delete 'size'
+      commits = event['payload'].delete 'shas'
+
+      commits.each do |commit|
+        id, email, msg, name, flag = *commit
+        event['payload'].merge!({
+          'commit' => {
+            'id' => id, 'email' => email, 'msg' => msg.split.join(' '),
+            'name' => name, 'flag' => flag
+          }
+        })
+
+        save(r, event, options)
       end
+    when 'GollumEvent'
+      pages = event['payload'].delete 'pages'
+
+      pages.each do |page|
+        page['summary'] = page['summary'].split.join(' ') if page['summary']
+        event['payload'].merge!({'page' => page})
+        save(r, event, options)
+      end
+    else
+      save(r, event, options)
     end
 
     raise "Record <> schema mismatch: #{r.size}, #{schema.size}. Exiting." if r.size != schema.size

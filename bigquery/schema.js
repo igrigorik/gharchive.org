@@ -728,11 +728,63 @@
       "type":"STRING"
    },
    {
+      "name":"payload_comment_original_commit_id",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_comment_original_position",
+      "type":"INTEGER"
+   },
+   {
       "name":"payload_after",
       "type":"STRING"
    },
    {
       "name":"payload_before",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_commit_id",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_commit_email",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_commit_msg",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_commit_name",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_commit_flag",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_page_sha",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_page_title",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_page_action",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_page_page_name",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_page_summary",
+      "type":"STRING"
+   },
+   {
+      "name":"payload_page_html_url",
       "type":"STRING"
    },
    {
