@@ -6,6 +6,8 @@ require 'zlib'
 require 'yajl'
 require 'csv'
 
+ARGV << '--help' if ARGV.empty?
+
 options = {schema: 'schema.js', verbose: false, compress: true}
 OptionParser.new do |opts|
   opts.banner = "Usage: flatten.rb [options]"
