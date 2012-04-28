@@ -51,6 +51,27 @@ Yajl::Parser.parse(js) do |event|
   print event
 end
 ```
+__Note: [example script to import data into SQLite db](https://gist.github.com/2426614)__
+
+----
+
+GitHub Archive dataset is also available via [Google BigQuery](https://developers.google.com/bigquery/). The JSON data is [normalized](https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js) and is updated every hour, allowing you to run [arbitrary queries](https://developers.google.com/bigquery/docs/query-reference) and analysis over the entire dataset in seconds. To get started, login into the BigQuery console (bigquery.cloud.google.com), and add the project (name: "*githubarchive*"):
+
+![BigQuery](http://www.githubarchive.org/assets/img/bigquery-directions.png)
+
+An example query, for more check the [repository readme](https://github.com/igrigorik/githubarchive.org/tree/master/bigquery):
+
+```sql
+/* top 100 repos for Ruby by number of pushes */
+SELECT repository_name, count(repository_name) as pushes, repository_description, repository_url
+FROM github.events
+WHERE type="PushEvent"
+    AND repository_language="Ruby"
+    AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
+GROUP BY repository_name, repository_description, repository_url
+ORDER BY watches DESC
+LIMIT 100
+```
 
 ### License
 
