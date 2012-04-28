@@ -2,9 +2,11 @@
 
 [Google BigQuery](https://developers.google.com/bigquery/) is a web service that lets you do interactive analysis of massive datasets—up to billions of rows.
 
-The Github Activity stream is automatically uploaded to BigQuery sevice to enable interactive analysis.
+The Github Activity stream is automatically uploaded to BigQuery sevice to enable interactive analysis. Follow the [instructions to access the dataset](http://www.githubarchive.org/).
 
 ## Sample Queries
+
+Have a clever query you would like to share? Fork the project, add it to the project under **queries/name.sql** and send a pull request!
 
 ```sql
 /* distribution of different events on GitHub */
@@ -58,13 +60,3 @@ ORDER BY date DESC
 ```
 
 For full schema of available fields to select, order, and group by, see schema.js.
-
-## Manually loading the data
-
-If you want to load the archive data into your own BigQuery project:
-
-```bash
-$> wget http://data.githubarchive.org/2012-03-11-15.json.gz
-$> ruby transform.rb -i 2012-03-11-15.json.gz
-$> python bq.py --apilog true load github.events 2012-03-11-15.json.gz-out.csv.gz schema.js
-```
