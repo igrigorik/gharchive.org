@@ -43,7 +43,14 @@ def flatmap(h, e, prefix = '')
     if v.is_a?(Hash)
       flatmap(h, v, prefix+k+"_")
     else
-      h[prefix+k] = v unless v.is_a? Array
+      if not v.is_a? Array
+        if v.is_a? String
+          v = v.split.join(' ')
+          v = v[0,10000] + ' ...' if v.size > 10000
+        end
+
+        h[prefix+k] = v
+      end
     end
   end
   h
@@ -85,7 +92,7 @@ begin
         id, email, msg, name, flag = *commit
         event['payload'].merge!({
           'commit' => {
-            'id' => id, 'email' => email, 'msg' => msg.split.join(' '),
+            'id' => id, 'email' => email, 'msg' => msg,
             'name' => name, 'flag' => flag
           }
         })
@@ -96,7 +103,7 @@ begin
       pages = event['payload'].delete 'pages'
 
       pages.each do |page|
-        page['summary'] = page['summary'].split.join(' ') if page['summary']
+        page['summary'] = page['summary'] if page['summary']
         event['payload'].merge!({'page' => page})
         save(r, event, options)
       end
