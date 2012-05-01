@@ -43,7 +43,7 @@ system("/usr/local/bin/bq --credential_file /home/archiver/githubarchive/bigquer
 system("/usr/local/bin/bq #{'--nosync' if !options[:sync]} " +
        "#{'--apilog true' if options[:verbose]} " +
        "--credential_file /home/archiver/githubarchive/bigquery/.bigquery.v2.token " +
-       "load github.events /tmp/bq.csv.gz")
+       "load github.timeline /tmp/bq.csv.gz")
 
 File.unlink("/tmp/bq.csv.gz")
 File.unlink(options[:file])
