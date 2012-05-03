@@ -64,7 +64,7 @@ An example query, for more check the [repository readme](https://github.com/igri
 ```sql
 /* top 100 repos for Ruby by number of pushes */
 SELECT repository_name, count(repository_name) as pushes, repository_description, repository_url
-FROM github.events
+FROM [githubarchive:github.timeline]
 WHERE type="PushEvent"
     AND repository_language="Ruby"
     AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
