@@ -71,7 +71,7 @@ EM.run do
 
         @latest = urls
         new_events.each do |event|
-          @file.write(Yajl::Encoder.encode(event))
+          @file.puts(Yajl::Encoder.encode(event))
         end
 
         @log.info "Found #{new_events.size} new events"
