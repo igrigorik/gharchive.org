@@ -1,6 +1,6 @@
 # GitHub Archive
 
-[http://www.githubarchive.org]()
+[http://www.githubarchive.org](http://www.githubarchive.org/)
 
 Open-source developers all over the world are working on millions of projects: writing code & documentation, fixing & submitting bugs, and so forth. GitHub Archive is a project to **record** the public GitHub timeline, **archive it**, and **make it easily accessible for** further analysis.
 
@@ -55,7 +55,7 @@ __Note: [example script to import data into SQLite db](https://gist.github.com/2
 
 ----
 
-GitHub Archive dataset is also available via [Google BigQuery](https://developers.google.com/bigquery/). The JSON data is [normalized](https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js) and is updated every hour, allowing you to run [arbitrary queries](https://developers.google.com/bigquery/docs/query-reference) and analysis over the entire dataset in seconds. To get started, login into the BigQuery console (bigquery.cloud.google.com), and add the project (name: "*githubarchive*"):
+GitHub Archive dataset is also available via [Google BigQuery](https://developers.google.com/bigquery/). The JSON data is [normalized](https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js) and is updated every hour, allowing you to run [arbitrary queries](https://developers.google.com/bigquery/docs/query-reference) and analysis over the entire dataset in seconds. To get started, login into the [BigQuery console](bigquery.cloud.google.com), and add the project (name: "*githubarchive*"), or take a look at the 03/11..05/11 snapshot of the data under "publicdata:samples":
 
 ![BigQuery](http://www.githubarchive.org/assets/img/bigquery-directions.png)
 
