@@ -8,6 +8,10 @@ Open-source developers all over the world are working on millions of projects: w
 
 ----
 
+Looking for the [daily top new & watched repository](http://us5.campaign-archive2.com/home/?u=439aa16a39e4b10e0b65ff2ef&id=0b82fec5c2) reports? [Sign up here](http://githubarchive.us5.list-manage.com/subscribe?u=439aa16a39e4b10e0b65ff2ef&id=0b82fec5c2).
+
+----
+
 GitHub provides [18 event types](http://developer.github.com/v3/events/types/), which range from new commits and fork events, to opening new tickets, commenting, and adding members to a project. The activity is aggregated in hourly archives, which you can access with any HTTP client:
 
 <table>
@@ -19,16 +23,16 @@ GitHub provides [18 event types](http://developer.github.com/v3/events/types/), 
 </thead>
 <tbody>
   <tr>
-    <td>Activity for March 11, 2012 at 3PM PST</td>
-    <td><code>wget http://data.githubarchive.org/2012-03-11-15.json.gz</code></td>
+    <td>Activity for April 11, 2012 at 3PM PST</td>
+    <td><code>wget http://data.githubarchive.org/2012-04-11-15.json.gz</code></td>
   </tr>
   <tr>
-    <td>Activity for March 11, 2012</td>
-    <td><code>wget http://data.githubarchive.org/2012-03-11-{0..23}.json.gz</code></td>
+    <td>Activity for April 11, 2012</td>
+    <td><code>wget http://data.githubarchive.org/2012-04-11-{0..23}.json.gz</code></td>
   </tr>
   <tr>
-    <td>Activity for March 2012</td>
-    <td><code>wget http://data.githubarchive.org/2012-03-{01..31}-{0..23}.json.gz</code></td>
+    <td>Activity for April 2012</td>
+    <td><code>wget http://data.githubarchive.org/2012-04-{01..31}-{0..23}.json.gz</code></td>
   </tr>
 </tbody>
 </table>
