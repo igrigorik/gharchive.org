@@ -59,7 +59,7 @@ __Note: [example script to import data into SQLite db](https://gist.github.com/2
 
 ----
 
-GitHub Archive dataset is also available via [Google BigQuery](https://developers.google.com/bigquery/). The JSON data is [normalized](https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js) and is updated every hour, allowing you to run [arbitrary queries](https://developers.google.com/bigquery/docs/query-reference) and analysis over the entire dataset in seconds. To get started, login into the [BigQuery console](bigquery.cloud.google.com), and add the project (name: "*githubarchive*"), or take a look at the 03/11..05/11 snapshot of the data under "publicdata:samples":
+GitHub Archive dataset is also available via [Google BigQuery](https://developers.google.com/bigquery/). The JSON data is [normalized](https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js) and is updated every hour, allowing you to run [arbitrary queries](https://developers.google.com/bigquery/docs/query-reference) and analysis over the entire dataset in seconds. To get started, login into the [BigQuery console](https://bigquery.cloud.google.com), and add the project (name: "*githubarchive*"), or take a look at the 03/11..05/11 snapshot of the data under "publicdata:samples":
 
 ![BigQuery](http://www.githubarchive.org/assets/img/bigquery-directions.png)
 
