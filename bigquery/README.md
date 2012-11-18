@@ -57,6 +57,18 @@ WHERE type="PushEvent"
 	AND repository_watchers > 1
 	AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
 ORDER BY date DESC
+
+/* show SPDY, pagespeed, webp events */
+SELECT repository_name, repository_language, repository_description, repository_watchers, payload_commit_msg, url, PARSE_UTC_USEC(created_at) as timestamp
+FROM [githubarchive:github.timeline]
+WHERE type="PushEvent"
+  AND (
+    LOWER(payload_commit_msg) CONTAINS "spdy" OR
+    LOWER(payload_commit_msg) CONTAINS "pagespeed" OR
+    LOWER(payload_commit_msg) CONTAINS "webp "
+  )
+  AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-20 00:00:00')
+ORDER BY timestamp DESC
 ```
 
 For full schema of available fields to select, order, and group by, see schema.js.
