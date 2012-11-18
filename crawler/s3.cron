@@ -1,2 +1,0 @@
-2 * * * * gzip -9 /home/archiver/githubarchive/crawler/data/*.json && /usr/local/bin/s3cmd -c /home/archiver/.s3cfg --acl-public sync /home/archiver/githubarchive/crawler/data/*.gz s3://data.githubarchive.org/
-0 0 * * * find /home/archiver/githubarchive/crawler/data/* -mtime +30 -exec rm {} \;
