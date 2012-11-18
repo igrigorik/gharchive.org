@@ -6,6 +6,9 @@ require 'zlib'
 require 'yajl'
 require 'csv'
 
+$: << '.'
+require 'remap.rb'
+
 ARGV << '--help' if ARGV.empty?
 
 options = {schema: 'schema.js', verbose: false, compress: true}
@@ -59,10 +62,18 @@ end
 def save(row, event, opt)
   flatmap({}, event).each do |k,v|
     v = (Time.parse(v).utc.strftime('%Y-%m-%d %T') rescue '') if k =~ /_at$/
-    if row.include? k
+    v.clean! if v.is_a? String
+
+    if row.include?(k)
       row[k] = v
     else
-      puts "Unknown field: #{k}, value: #{v}" if opt[:verbose]
+      nk = k.remap
+      if row.include?(nk)
+        puts "Remapped #{k} => #{nk}, value: #{v}" if opt[:verbose]
+        row[nk] = v
+      else
+        puts "Unknown field: #{k}, value: #{v}" if opt[:verbose] && !IGNORED.include?(k)
+      end
     end
   end
 end
@@ -87,6 +98,7 @@ begin
     when 'PushEvent'
       num = event['payload'].delete 'size'
       commits = event['payload'].delete 'shas'
+      commits ||= []
 
       commits.each do |commit|
         id, email, msg, name, flag = *commit
@@ -101,6 +113,7 @@ begin
       end
     when 'GollumEvent'
       pages = event['payload'].delete 'pages'
+      pages ||= []
 
       pages.each do |page|
         page['summary'] = page['summary'] if page['summary']
