@@ -37,7 +37,7 @@ GitHub provides [18 event types](http://developer.github.com/v3/events/types/), 
 </tbody>
 </table>
 
-__Note: timeline data is available starting March 11, 2012.__
+__Note: timeline data is available starting February 12, 2011.__
 
 ----
 
