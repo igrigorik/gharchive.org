@@ -68,7 +68,7 @@ There is a lot more information about repository now.
 
 Bellow you can find sample record from 2011-03 datasets:
 
-<pre>
+```json
 	{
 		"repo": {
 		    "id": 991048,
@@ -110,4 +110,4 @@ Bellow you can find sample record from 2011-03 datasets:
 		},
 		"id": "1158443437"
 	}
-</pre>
+```
