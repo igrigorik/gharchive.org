@@ -15,8 +15,8 @@ There is a lot more information about repository now.
 
 ### New schema example:
 
-<pre>
-	{
+```json
+    {
 		"repository": {
 		    "homepage": "",
 		    "watchers": 2,
@@ -61,7 +61,7 @@ There is a lot more information about repository now.
 		"url": "https://github.com/musubu/node-opds-parser/compare/d8d0b627a6...f0587048e0",
 		"type": "PushEvent"
 	}
-</pre>
+```
 
 
 ## 2011-03 first json schema
