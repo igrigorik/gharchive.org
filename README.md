@@ -73,7 +73,7 @@ WHERE type="PushEvent"
     AND repository_language="Ruby"
     AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
 GROUP BY repository_name, repository_description, repository_url
-ORDER BY watches DESC
+ORDER BY pushes DESC
 LIMIT 100
 ```
 
