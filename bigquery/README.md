@@ -69,6 +69,25 @@ WHERE type="PushEvent"
   )
   AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-20 00:00:00')
 ORDER BY timestamp DESC
+
+/* top 100 repos by total number of forks, for a specific date rage */
+SELECT repository_url, MAX(repository_forks) as total_number_of_forks
+FROM [githubarchive:github.timeline]
+WHERE
+    PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC("2012-03-15 00:00:00") AND
+    PARSE_UTC_USEC(created_at) < PARSE_UTC_USEC("2012-03-16 00:00:00")
+GROUP BY repository_url
+ORDER BY total_number_of_forks DESC
+LIMIT 100
+
+/* month-by-month count of push events for Go */
+SELECT LEFT(created_at, 7) as month, COUNT(*) as pushes
+FROM [githubarchive:github.timeline]
+WHERE
+    type='PushEvent' AND
+    repository_language='Go'
+GROUP BY month
+ORDER BY month DESC
 ```
 
 For full schema of available fields to select, order, and group by, see schema.js.
