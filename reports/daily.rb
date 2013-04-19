@@ -8,12 +8,12 @@ template = ERB.new IO.read('template.html')
 
 top_new_repos = <<-SQL
 SELECT repository_name, repository_language, repository_description, COUNT(repository_name) as cnt, repository_url
-FROM github.timeline
+FROM githubarchive:github.timeline
 WHERE type="WatchEvent"
   AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC("#{yesterday} 20:00:00")
         AND repository_url IN (
       SELECT repository_url
-      FROM github.timeline
+      FROM githubarchive:github.timeline
       WHERE type="CreateEvent"
               AND PARSE_UTC_USEC(repository_created_at) >= PARSE_UTC_USEC('#{yesterday} 20:00:00')
               AND repository_fork = "false"
@@ -28,7 +28,7 @@ SQL
 
 top_watched_repos = <<-SQL
 SELECT repository_name, repository_language, repository_description, COUNT(repository_name) as cnt, repository_url
-FROM github.timeline
+FROM githubarchive:github.timeline
 WHERE type='WatchEvent'
   AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('#{yesterday} 20:00:00')
 GROUP BY repository_name, repository_language, repository_description, repository_url
