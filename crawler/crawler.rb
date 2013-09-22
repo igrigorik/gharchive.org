@@ -23,6 +23,7 @@ end
 }))
 
 @latest = []
+@latest_key = lambda { |e| "#{e['type']}:#{e['actor']}:#{e['url']}:#{e['created_at']}" }
 
 ##
 ## Crawler
@@ -66,8 +67,8 @@ EM.run do
     req.callback do
       begin
         latest = Yajl::Parser.parse(req.response)
-        urls = latest.collect {|e| e['url']}
-        new_events = latest.reject {|e| @latest.include? e['url']}
+        urls = latest.collect(&@latest_key)
+        new_events = latest.reject {|e| @latest.include? @latest_key.call(e)}
 
         @latest = urls
         new_events.each do |event|
