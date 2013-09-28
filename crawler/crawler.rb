@@ -79,7 +79,7 @@ EM.run do
         StatHat.new.ez_count('Github Events', new_events.size)
 
         if new_events.size >= 25
-          EM.add_timer(1.5, &process)
+          EM.add_timer(1.0, &process)
         end
 
       rescue Exception => e
@@ -93,5 +93,5 @@ EM.run do
     end
   end
 
-  EM.add_periodic_timer(6, &process)
+  EM.add_periodic_timer(4, &process)
 end
