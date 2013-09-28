@@ -2,7 +2,7 @@
 
 [Google BigQuery](https://developers.google.com/bigquery/) is a web service that lets you do interactive analysis of massive datasets—up to billions of rows.
 
-The Github Activity stream is automatically uploaded to BigQuery sevice to enable interactive analysis. Follow the [instructions to access the dataset](http://www.githubarchive.org/).
+The Github Activity stream is automatically uploaded to BigQuery service to enable interactive analysis. Follow the [instructions to access the dataset](http://www.githubarchive.org/).
 
 ## Sample Queries
 
