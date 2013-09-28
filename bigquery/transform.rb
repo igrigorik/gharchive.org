@@ -48,7 +48,8 @@ def flatmap(h, e, prefix = '')
     else
       if not v.is_a? Array
         if v.is_a? String
-          v = v.split.join(' ')
+          v.force_encoding('binary')
+          v = v.encode('UTF-8', :invalid => :replace, :undef => :replace).split.join(' ')
           v = v[0,10000] + ' ...' if v.size > 10000
         end
 
