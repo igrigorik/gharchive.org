@@ -12,7 +12,7 @@ Looking for the [daily top new & watched repository](http://us5.campaign-archive
 
 ----
 
-GitHub provides [18 event types](http://developer.github.com/v3/activity/events/types/), which range from new commits and fork events, to opening new tickets, commenting, and adding members to a project. The activity is aggregated in hourly archives, which you can access with any HTTP client:
+GitHub provides [23 event types](http://developer.github.com/v3/activity/events/types/), which range from new commits and fork events, to opening new tickets, commenting, and adding members to a project. The activity is aggregated in hourly archives, which you can access with any HTTP client:
 
 <table>
 <thead>
