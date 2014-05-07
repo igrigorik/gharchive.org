@@ -32,7 +32,7 @@ GitHub provides [23 event types](http://developer.github.com/v3/activity/events/
   </tr>
   <tr>
     <td>Activity for April 2012</td>
-    <td><code>wget http://data.githubarchive.org/2012-04-{01..31}-{0..23}.json.gz</code></td>
+    <td><code>wget http://data.githubarchive.org/2012-04-{01..30}-{0..23}.json.gz</code></td>
   </tr>
 </tbody>
 </table>
