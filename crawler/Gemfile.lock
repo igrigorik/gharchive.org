@@ -1,32 +1,32 @@
 GIT
   remote: git://github.com/eventmachine/eventmachine.git
-  revision: cc9a3adc5b4cc5640057b396df882220fa46ddd3
+  revision: b7f2b34d6b8d04aa8fdb017059833b64c602d819
   specs:
-    eventmachine (1.0.0.beta.4)
+    eventmachine (1.0.3)
 
 GIT
   remote: git://github.com/igrigorik/em-http-request.git
-  revision: e7beb1b2330f4466853ec08446b2225961fee484
+  revision: f3e64c01cb7f3039e2309cbb165a83e98b87af5e
   specs:
-    em-http-request (1.0.1)
-      addressable (>= 2.2.3)
-      cookiejar
-      em-socksify
-      eventmachine (>= 1.0.0.beta.4)
-      http_parser.rb (>= 0.5.3)
+    em-http-request (1.1.2)
+      addressable (>= 2.3.4)
+      cookiejar (<= 0.3.0)
+      em-socksify (>= 0.3)
+      eventmachine (>= 1.0.3)
+      http_parser.rb (>= 0.6.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    addressable (2.2.7)
+    addressable (2.3.6)
     cookiejar (0.3.0)
-    em-socksify (0.1.0)
-      eventmachine
+    em-socksify (0.3.0)
+      eventmachine (>= 1.0.0.beta.4)
     em-stathat (0.1.0)
       em-http-request (~> 1.0)
-    http_parser.rb (0.5.3)
+    http_parser.rb (0.6.0)
     log4r (1.1.10)
-    yajl-ruby (1.1.0)
+    yajl-ruby (1.2.1)
 
 PLATFORMS
   ruby
