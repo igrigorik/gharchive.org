@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/eventmachine/eventmachine.git
-  revision: b7f2b34d6b8d04aa8fdb017059833b64c602d819
+  revision: 4de7d0e00fe87819840ba7c7c91e7ed09b85467c
   specs:
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
 
 GIT
   remote: git://github.com/igrigorik/em-http-request.git
-  revision: f3e64c01cb7f3039e2309cbb165a83e98b87af5e
+  revision: 5145b7cf1fa3deb35629a115259dd260653ec7bd
   specs:
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
