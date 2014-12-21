@@ -1,1 +1,1 @@
-githubarchive: bundle exec ruby crawler.rb
+crawler: bundle exec ruby crawler.rb
