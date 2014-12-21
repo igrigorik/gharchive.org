@@ -36,7 +36,7 @@ EM.run do
   @latest_key = lambda { |e| "#{e['id']}" }
 
   process = Proc.new do
-      req = HttpRequest.new("https://api.github.com/events").get({
+      req = HttpRequest.new("https://api.github.com/events?per_page=100").get({
       :head => {
         'user-agent' => 'githubarchive.org',
         'Authorization' => 'token ' + ENV['GITHUB_TOKEN']
@@ -67,12 +67,16 @@ EM.run do
           @file.puts(Yajl::Encoder.encode(event))
         end
 
-        @log.info "Found #{new_events.size} new events"
-        StatHat.new.ez_count('Github Events', new_events.size)
+        remaining = req.response_header.raw['X-RateLimit-Remaining']
+        reset = Time.at(req.response_header.raw['X-RateLimit-Reset'].to_i)
+        @log.info "Found #{new_events.size} new events: #{new_events.collect(&@latest_key)}, API: #{remaining}, reset: #{reset}"
 
-        if new_events.size >= 15
-          EM.add_timer(1.0, &process)
+        if new_events.size >= 100
+          @log.info "Missed records.."
         end
+
+        StatHat.new.ez_count('Github Events', new_events.size)
+        EM.add_timer(2.0, &process)
 
       rescue Exception => e
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
@@ -87,5 +91,5 @@ EM.run do
     end
   end
 
-  EM.add_periodic_timer(2.5, &process)
+  process.call
 end
