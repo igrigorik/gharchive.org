@@ -88,6 +88,8 @@ EM.run do
       @log.error "Error: #{req.response_header.status}, \
                   header: #{req.response_header}, \
                   response: #{req.response}"
+
+      EM.add_timer(2.0, &process)
     end
   end
 
