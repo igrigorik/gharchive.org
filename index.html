@@ -7,11 +7,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="author" content="Ilya Grigorik">
     <meta itemprop="name" content="Github Archive">
     <meta name="description" content="GitHub Archive is a project to record the public GitHub timeline, archive it, and make it easily accessible for further analysis.">
     <meta itemprop="image" content="http://gems.github.com/octocat.png" />
 
+    <link rel="canonical" href="https://www.githubarchive.org/">
     <link rel="shortcut icon" href="https://github.com/favicon.ico">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
@@ -35,8 +35,8 @@
 
         <span style="float:right; margin-top:0.25em">
           <span style="margin-right:1em"><a class="github-button" href="https://github.com/igrigorik/githubarchive.org" data-count-href="/igrigorik/githubarchive.org/stargazers" data-count-api="/repos/igrigorik/githubarchive.org#stargazers_count">Star</a></span>
-          <g:plusone size="medium"></g:plusone>
-          <a href="https://twitter.com/share" class="twitter-share-button" data-text="GitHub public timeline archive @ " data-related="igrigorik">Tweet</a>
+          <g:plusone size="medium" href="http://www.githubarchive.org/"></g:plusone>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-text="GitHub public timeline archive @ " data-url="http://www.githubarchive.org/">Tweet</a>
         </span>
       </h1>
 
@@ -180,14 +180,6 @@
     </div> <!-- /container -->
   </body>
 
-  <script type="text/javascript">
-    (function() {
-      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-      po.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
-  </script>
-
   <script>
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
   </script>
@@ -204,5 +196,6 @@
   })();
   </script>
 
+  <script async defer src="https://apis.google.com/js/platform.js"></script>
   <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 </html>
