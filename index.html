@@ -19,20 +19,16 @@
         padding-top: 20px;
         padding-bottom: 40px;
       }
-      .large {
+      p, li {
         font-size:16px;
         line-height:25px;
       }
     </style>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
   </head>
 
   <body>
-
     <div class="container">
 
       <h1 style="margin-bottom:0.5em">
@@ -40,14 +36,14 @@
         GitHub <span style="color:#c60000">Archive</span>
 
         <span style="float:right; margin-top:0.25em">
-	  <iframe src="http://ghbtns.com/github-btn.html?user=igrigorik&repo=githubarchive.org&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+          <span style="margin-right:1em"><a class="github-button" href="https://github.com/igrigorik/githubarchive.org" data-count-href="/igrigorik/githubarchive.org/stargazers" data-count-api="/repos/igrigorik/githubarchive.org#stargazers_count">Star</a></span>
           <g:plusone size="medium"></g:plusone>
           <a href="https://twitter.com/share" class="twitter-share-button" data-text="GitHub public timeline archive @ " data-related="igrigorik">Tweet</a>
         </span>
       </h1>
 
       <div class="hero-unit" align="center">
-        <script src="http://www.stathat.com/javascripts/embed.js"></script>
+        <script src="https://www.stathat.com/javascripts/embed.js"></script>
         <script>StatHatEmbed.render({s1: 'lxoC', w: 840, h: 260});</script>
       </div>
 
@@ -63,16 +59,7 @@
 
       <div class="row">
         <div class="span12">
-
-          <span style="float:right"><script type="text/javascript" language="JavaScript" src="http://githubarchive.us5.list-manage.com/subscriber-count?b=39&amp;u=ab21678a-9ecc-4f33-97fe-20824a2c5fff&amp;id=0b82fec5c2"></script></span>
-
-           <p class="large">
-              <span>Looking for the <strong><a href="http://us5.campaign-archive2.com/home/?u=439aa16a39e4b10e0b65ff2ef&amp;id=0b82fec5c2">daily top new &amp; watched repository</a></strong> reports? <a href="http://githubarchive.us5.list-manage.com/subscribe?u=439aa16a39e4b10e0b65ff2ef&amp;id=0b82fec5c2">Sign up here</a>.
-           </p>
-
-           <hr />
-
-           <p class="large">GitHub provides <a href="http://developer.github.com/v3/activity/events/types/">23 event types</a>, which range from new commits and fork events, to opening new tickets, commenting, and adding members to a project. The activity is aggregated in hourly archives, which you can access with any HTTP client:</p>
+           <p>GitHub provides <a href="http://developer.github.com/v3/activity/events/types/">20+ event types</a>, which range from new commits and fork events, to opening new tickets, commenting, and adding members to a project. These events are aggregated into hourly archives, which you can access with any HTTP client:</p>
 
            <table class="table table-striped">
             <thead>
@@ -83,42 +70,101 @@
             </thead>
             <tbody>
               <tr>
-                <td>Activity for April 11, 2012, 3PM UTC</td>
-                <td><code>wget http://data.githubarchive.org/2012-04-11-15.json.gz</code></td>
+                <td>Activity for 1/1/2015 @ 3PM UTC</td>
+                <td><code>wget http://data.githubarchive.org/2015-01-01-15.json.gz</code></td>
               </tr>
               <tr>
-                <td>Activity for April 11, 2012</td>
-                <td><code>wget http://data.githubarchive.org/2012-04-11-{0..23}.json.gz</code></td>
+                <td>Activity for 1/1/2015</td>
+                <td><code>wget http://data.githubarchive.org/2015-01-01-{0..23}.json.gz</code></td>
               </tr>
               <tr>
-                <td>Activity for April 2012</td>
-                <td><code>wget http://data.githubarchive.org/2012-04-{01..31}-{0..23}.json.gz</code></td>
+                <td>Activity for all of January 2015</td>
+                <td><code>wget http://data.githubarchive.org/2015-01-{01..30}-{0..23}.json.gz</code></td>
               </tr>
             </tbody>
             </table>
 
-            <p><em>Note: timeline data is available starting February 12, 2011.</em></p>
             <br />
 
-            <p class="large">Each archive contains a stream of JSON encoded GitHub events (<a href="https://gist.github.com/2017462">sample</a>), which you can process in any language. Ruby example:</p>
+            <p>Each archive contains JSON encoded events as reported by the GitHub API. You can download the raw data and apply own processing to it - e.g. write a custom aggregation script, import it into a database, and so on! An example Ruby script to download and iterate over a single archive:</p>
 
-            <script src="https://gist.github.com/2017506.js"></script>
-            <p><em>Note: <a href="https://gist.github.com/2426614">example script to import data into SQLite db</a></em></p>
+            <script src="https://gist.github.com/igrigorik/2017506.js"></script>
 
+            <ul>
+              <li>Activity archives are available starting 2/12/2011.</li>
+              <li>Activity archives for dates between 2/12/2011-12/31/2014 was recorded from the (now deprecated) Timeline API.</li>
+              <li>Activity archives for dates starting 1/1/2015 is recorded from the Events API.</li>
+            </ul>
         </div>
       </div>
 
       <hr />
       <div class="row">
         <div class="span12">
-          <p class="large">GitHub Archive dataset is also available via <a href="https://developers.google.com/bigquery/">Google BigQuery</a>. The JSON data is <a href="https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js">normalized</a> and is updated every hour, allowing you to run <a href="https://developers.google.com/bigquery/docs/query-reference">arbitrary queries</a> and analysis over the entire dataset in seconds. To get started, login into the BigQuery console (<a href="https://bigquery.cloud.google.com/">bigquery.cloud.google.com</a>), and add the project (name: "<b>githubarchive</b>"), or take a look at the 03/11..05/11 snapshot of the data under "<b>publicdata:samples</b>":</p>
+          <h2 name="bigquery">Analyzing event data with BigQuery</h2>
+          <br/>
 
-          <div class="hero-unit" align="center" style="padding:10px">
-            <img src="assets/img/bigquery-directions.png" />
-          </div>
+          <p>The entire GitHub Archive is also available as a public dataset on <a href="https://developers.google.com/bigquery/">Google BigQuery</a>: the dataset is automatically updated every hour and enables you to run <a href="https://developers.google.com/bigquery/docs/query-reference">arbitrary SQL-like queries</a> over the entire dataset in seconds - i.e. no need to download or process any data on your own. To get started:</p>
 
-          <p class="large">An example query, for more check the <a href="https://github.com/igrigorik/githubarchive.org/tree/master/bigquery">repository readme</a>:</p>
-          <script src="https://gist.github.com/2521371.js?file=github-ruby.sql"></script>
+          <ol>
+            <li>If you don't already have a Google project...</li>
+            <ul>
+              <li><a href="https://console.developers.google.com/">Login into the Google Developer Console</a></li>
+              <li><a href="https://developers.google.com/console/help/#creatingdeletingprojects">Create a project</a> and <a href="https://developers.google.com/console/help/#activatingapis">activate the BigQuery API</a></li>
+            </ul>
+            <li>Open public dataset: <a href="https://bigquery.cloud.google.com/project/githubarchive">https://bigquery.cloud.google.com/project/githubarchive</a></li>
+            <li>Execute your first example query...</li>
+          </ol>
+
+          <script src="https://gist.github.com/igrigorik/90fab69946d27842882c.js"></script>
+
+          <p>Note that the public dataset contains several types of tables:</p>
+
+          <ul>
+            <li><code>2011</code>, <code>2012</code>, <code>2013</code>, and <code>2014</code> tables contain activities for each respective year</li>
+            <ul>
+              <li>The schema is in a "flattened" format where each field is mapped into a distinct column</li>
+              <li>The schema is the same between all years</li>
+            </ul>
+
+            <li><code>events_YYYYMMDD</code> tables contain daily activity starting from 1/1/2015</li>
+            <ul>
+              <li>The schema contains distinct columns for common activity fields (see "<a href="https://developer.github.com/v3/activity/events/">same response format</a>"), plus a payload string field which contains the JSON encoded activity description. The format of the payload is different for each type and may be updated by GitHub at any point, hence it is kept as a string value in BigQuery. However, you can extract particular fields from the payload using the provided <a href="https://cloud.google.com/bigquery/query-reference#jsonfunctions">JSON functions</a> - e.g. see query example above with <code>JSON_EXTRACT()</code>.</li>
+            </ul>
+          </ul>
+
+          <p>Starting 1/1/2015 the data is split into daily tables to allow for more efficient processing. Note that you can still run queries that span multiple tables using a <a href="https://cloud.google.com/bigquery/query-reference#tablewildcardfunctions">table wildcard</a> - e.g. see example above with <code>TABLE_DATE_RANGE()</code>.</p>
+
+          <p><strong>Note:</strong> you get <a href="https://cloud.google.com/bigquery/pricing#queries">1 TB of data processed per month free of charge</a>, use it wisely!</p>
+
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <h2 name="resources">Research, visualizations, talks...</h2>
+          <br/>
+
+          <ul>
+            <li>GitHub Data Challenge: <a href="https://github.com/blog/1162-github-data-challenge-winners">2012</a>, <a href="https://github.com/blog/1544-data-challenge-ii-results">2013</a>, and <a href="https://github.com/blog/1892-third-annual-data-challenge-winners">2014 winners</a>.</li>
+            <li><a href="https://www.youtube.com/watch?v=U_LNo_cSc70">Analyzing Millions of GitHub Commits (O'Reilly Strata talk)</a></li>
+            <li>
+            <a href="http://githut.info/">GitHut</a> is an attempt to visualize and explore the complexity of the universe of programming languages.</li>
+            <li>
+            <a href="http://octoboard.com/">Octoboard</a> is a GitHub activity dashboard.</li>
+            <li>
+            <a href="http://danielvdende.com/gdc2014/">Who speaks what on GitHub?</a> Three visualizations provide insight into the language skills of users on GitHub.</li>
+            <li>
+            <a href="http://blog.coderstats.net/github/2013/event-types/">GitHub in 2013</a> is a brief visual overview of GitHub event types in 2013.</li>
+            <li><a href="http://geeksta.net/geeklog/exploring-expressions-emotions-github-commit-messages/">Exploring Expressions of Emotions in GitHub Commit Messages</a></li>
+            <li>
+            <a href="http://datahackermd.com/2013/language-use-on-github/">Language Use on GitHub</a> visualization of the rank correlation between languages.</li>
+            <li><a href="http://www.fastcolabs.com/3015178/the-top-10-hottest-github-projects-right-now?partner=rss">The Top 11 Hottest GitHub Projects Right Now</a></li>
+          </ul>
+
+          <p>P.S. Have a cool project that should be on this list? <a href="https://github.com/igrigorik/githubarchive.org/tree/gh-pages">Send a pull request</a>!</p>
         </div>
       </div>
 
@@ -126,10 +172,9 @@
 
       <footer>
         <p>
-          <a href="http://www.igvita.com" rel="me" style="vertical-align:top; margin-right:1em"><strong>Ilya Grigorik</strong></a>
+          <a href="https://github.com/igrigorik/githubarchive.org" style="vertical-align:top; margin-right:1em"><strong>igrigorik/githubarchive.org</strong></a>
           <span style="float:right;">
-	    <iframe src="http://ghbtns.com/github-btn.html?user=igrigorik&type=follow&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165px" height="20px" style="margin-right:1em"></iframe>
-            <a href="https://twitter.com/igrigorik" class="twitter-follow-button" data-show-count="true">Follow @igrigorik</a>
+            <a class="github-button" href="https://github.com/igrigorik/githubarchive.org" data-count-href="/igrigorik/githubarchive.org/stargazers" data-style="mega" data-count-api="/repos/igrigorik/githubarchive.org#stargazers_count">Star</a>
           </span>
         </p>
       </footer>
@@ -159,13 +204,6 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-  </script>
-
-  <script type="text/javascript" src="http://include.reinvigorate.net/re_.js"></script>
-  <script type="text/javascript">
-  try {
-  reinvigorate.track("i9014-6t00e66443");
-  } catch(err) {}
   </script>
 
 </html>
