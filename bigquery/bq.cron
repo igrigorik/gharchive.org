@@ -1,8 +1,0 @@
-# sync data to cloud storage
-5 * * * * /bin/bash -l -c 'cd /home/igrigorik/githubarchive.org/crawler/data && gsutil cp -z json -a public-read `date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json gs://data.githubarchive.org' >> /home/igrigorik/githubarchive.org/crawler/data/sync.log 2>&1
-
-# import data into bigquery
-10 * * * * /bin/bash -l -c 'cd /home/igrigorik/githubarchive.org/bigquery     && ruby upload.rb -i ../crawler/data/`date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json' >> /home/igrigorik/githubarchive.org/crawler/data/sync.log 2>&1
-
-# keep last 365 days worth of data
-0 0 * * * find /home/igrigorik/githubarchive.org/crawler/data/* -mtime +365 -exec rm {} \;
