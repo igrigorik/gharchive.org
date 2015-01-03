@@ -110,7 +110,7 @@
               <li><a href="https://console.developers.google.com/">Login into the Google Developer Console</a></li>
               <li><a href="https://developers.google.com/console/help/#creatingdeletingprojects">Create a project</a> and <a href="https://developers.google.com/console/help/#activatingapis">activate the BigQuery API</a></li>
             </ul>
-            <li>Open public dataset: <a href="https://bigquery.cloud.google.com/project/githubarchive">https://bigquery.cloud.google.com/project/githubarchive</a></li>
+            <li>Open public dataset: <a href="https://bigquery.cloud.google.com/dataset/githubarchive:github">https://bigquery.cloud.google.com/dataset/githubarchive:github</a></li>
             <li>Execute your first example query...</li>
           </ol>
 
@@ -119,7 +119,10 @@
           <p>Note that the public dataset contains several types of tables:</p>
 
           <ul>
-            <li><code>2011</code>, <code>2012</code>, <code>2013</code>, and <code>2014</code> tables contain activities for each respective year</li>
+            <li><code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2011">2011</a></code>,
+              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2012">2012</a></code>,
+              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2013">2013</a></code>, and 
+              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2014">2014</a></code> tables contain activities for each respective year</li>
             <ul>
               <li>The schema is in a "flattened" format where each field is mapped into a distinct column</li>
               <li>The schema is the same between all years</li>
