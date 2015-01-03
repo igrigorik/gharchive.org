@@ -34,8 +34,6 @@ end.parse!
 #
 
 start = Time.now
-schema = Yajl::Parser.parse(open(options[:schema]).read)
-headers = schema.map {|f| f['name']}
 
 begin
   options[:output] ||= options[:input] + "-out.json"
@@ -77,7 +75,7 @@ begin
   status = system(
         "bq load --source_format NEWLINE_DELIMITED_JSON " +
         "#{table} #{options[:output]} " +
-        "#{"schema.js" if newtable}"
+        "#{options[:schema] if newtable}"
       )
 
   if !status
