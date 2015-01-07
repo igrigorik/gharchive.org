@@ -36,7 +36,10 @@ EM.run do
   @latest_key = lambda { |e| "#{e['id']}" }
 
   process = Proc.new do
-      req = HttpRequest.new("https://api.github.com/events?per_page=100").get({
+      req = HttpRequest.new("https://api.github.com/events?per_page=100", {
+        :inactivity_timeout => 5,
+        :connect_timeout => 5
+      }).get({
       :head => {
         'user-agent' => 'githubarchive.org',
         'Authorization' => 'token ' + ENV['GITHUB_TOKEN']
