@@ -69,7 +69,7 @@ begin
   puts "\tUploading data to BigQuery..."
 
   # upload the data to BigQuery
-  table = "github.events_" + Time.parse(options[:input]).strftime("%Y%m%d")
+  table = "day.events_" + Time.parse(options[:input]).strftime("%Y%m%d")
   newtable = `bq show #{table}`.include? 'Not Found'
 
   status = system(
