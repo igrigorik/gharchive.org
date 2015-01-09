@@ -36,7 +36,7 @@ EM.run do
   @latest_key = lambda { |e| "#{e['id']}" }
 
   process = Proc.new do
-      req = HttpRequest.new("https://api.github.com/events?per_page=100", {
+      req = HttpRequest.new("https://api.github.com/events?per_page=200", {
         :inactivity_timeout => 5,
         :connect_timeout => 5
       }).get({
