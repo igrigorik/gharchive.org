@@ -53,7 +53,7 @@ EM.run do
         new_events = latest.reject {|e| @latest.include? @latest_key.call(e)}
 
         @latest = urls
-        new_events.reverse.each do |event|
+        new_events.sort_by {|e| [Time.parse(e['created_at']), e['id']] }.each do |event|
           timestamp = Time.parse(event['created_at']).strftime('%Y-%m-%d-%-k')
           archive = "data/#{timestamp}.json.current"
 
