@@ -110,33 +110,39 @@
               <li><a href="https://console.developers.google.com/">Login into the Google Developer Console</a></li>
               <li><a href="https://developers.google.com/console/help/#creatingdeletingprojects">Create a project</a> and <a href="https://developers.google.com/console/help/#activatingapis">activate the BigQuery API</a></li>
             </ul>
-            <li>Open public dataset: <a href="https://bigquery.cloud.google.com/dataset/githubarchive:github">https://bigquery.cloud.google.com/dataset/githubarchive:github</a></li>
-            <li>Execute your first example query...</li>
+            <li>Open public dataset: <a href="https://bigquery.cloud.google.com/dataset/githubarchive">https://bigquery.cloud.google.com/dataset/githubarchive</a></li>
+            <li>Execute your first query...</li>
           </ol>
 
           <script src="https://gist.github.com/igrigorik/90fab69946d27842882c.js"></script>
 
-          <p>Note that the public dataset contains several types of tables:</p>
+          <p>For convenience, note that there are multiple tables that you can use for your analysis:</p>
 
-          <ul>
-            <li><code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2011">2011</a></code>,
-              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2012">2012</a></code>,
-              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2013">2013</a></code>, and 
-              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:github.2014">2014</a></code> tables contain activities for each respective year</li>
-            <ul>
-              <li>The schema is in a "flattened" format where each field is mapped into a distinct column</li>
-              <li>The schema is the same between all years</li>
-            </ul>
+          <ol>
+            <li><strong>year dataset:</strong> <code><a href="https://bigquery.cloud.google.com/table/githubarchive:year.2011">2011</a></code>,
+              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:year.2012">2012</a></code>,
+              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:year.2013">2013</a></code>, and
+              <code><a href="https://bigquery.cloud.google.com/table/githubarchive:year.2014">2014</a></code> tables contain all activities for each respective year.</li>
+              <ul>
+                <li>The schema is in a "flattened" format where each field is mapped into a distinct column.</li>
+                <li>The schema is the same between all years.</li>
+              </ul>
 
-            <li><code>events_YYYYMMDD</code> tables contain daily activity starting from 1/1/2015</li>
-            <ul>
-              <li>The schema contains distinct columns for common activity fields (see "<a href="https://developer.github.com/v3/activity/events/">same response format</a>"), plus a payload string field which contains the JSON encoded activity description. The format of the payload is different for each type and may be updated by GitHub at any point, hence it is kept as a string value in BigQuery. However, you can extract particular fields from the payload using the provided <a href="https://cloud.google.com/bigquery/query-reference#jsonfunctions">JSON functions</a> - e.g. see query example above with <code>JSON_EXTRACT()</code>.</li>
-            </ul>
-          </ul>
+            <li><strong>month dataset:</strong> contains activity for each respective month between 2011-today - e.g. <code><a href="https://bigquery.cloud.google.com/table/githubarchive:month.201501">201501</a></code>.</li>
+              <ul>
+                <li>The schema for 201101~201412 tables is the same as 2011-2014 year tables: flattened with each field in a distinct column.</li>
+                <li>The schema for 201501+ tables contains nested records plus a JSON encoded payload - see below.</li>
+              </ul>
 
-          <p>Starting 1/1/2015 the data is split into daily tables to allow for more efficient processing. Note that you can still run queries that span multiple tables using a <a href="https://cloud.google.com/bigquery/query-reference#tablewildcardfunctions">table wildcard</a> - e.g. see example above with <code>TABLE_DATE_RANGE()</code>.</p>
+            <li><strong>day dataset:</strong> contains activity for each day starting on January 1, 2015 - e.g. <code><a href="https://bigquery.cloud.google.com/table/githubarchive:day.events_20150101">20150101</a></code>.</li>
+              <ul>
+                <li>The schema contains distinct columns for common activity fields (see <a href="https://developer.github.com/v3/activity/events/">same response format</a>), plus a payload string field which contains the JSON encoded activity description. The format of the payload is different for each type and may be updated by GitHub at any point, hence it is kept as a string value in BigQuery. However, you can extract particular fields from the payload using the provided <a href="https://cloud.google.com/bigquery/query-reference#jsonfunctions">JSON functions</a> - e.g. see query example above with <code>JSON_EXTRACT()</code>.</li>
+              </ul>
+          </ol>
 
-          <p><strong>Note:</strong> you get <a href="https://cloud.google.com/bigquery/pricing#queries">1 TB of data processed per month free of charge</a>, use it wisely!</p>
+          <p>Note that you get <a href="https://cloud.google.com/bigquery/pricing#queries">1 TB of data processed per month free of charge</a>. In order to make best use of it, you can restrict your queries to relevant time ranges to minimize the amount of scanned data. To scan multiple tables at once, you can use <a href="https://cloud.google.com/bigquery/query-reference#tablewildcardfunctions">table wildcards</a>:
+
+          <script src="https://gist.github.com/igrigorik/1cf65f6528e27ed1a580.js"></script>
 
         </div>
       </div>
