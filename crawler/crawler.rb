@@ -55,13 +55,12 @@ EM.run do
         @latest = urls
         new_events.sort_by {|e| [Time.parse(e['created_at']), e['id']] }.each do |event|
           timestamp = Time.parse(event['created_at']).strftime('%Y-%m-%d-%-k')
-          archive = "data/#{timestamp}.json.current"
+          archive = "data/#{timestamp}.json"
 
           if @file.nil? || (archive != @file.to_path)
-            unless @file.nil?
-              @log.info "Rotating archive. Old: #{@file.to_path}, New: #{archive}"
+            if !@file.nil?
+              @log.info "Rotating archive. Current: #{@file.to_path}, New: #{archive}"
               @file.close
-              File.rename(@file.to_path, @file.to_path.chomp('.current'))
             end
 
             @file = File.new(archive, "a+")

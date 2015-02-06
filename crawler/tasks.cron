@@ -1,5 +1,5 @@
 # sync data to cloud storage
-5 * * * * /bin/bash -l -c 'cd /home/igrigorik/githubarchive.org/crawler/data && gzip -9 *.json && gsutil -h "Content-Type: application/x-gzip" cp -a public-read `date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json.gz gs://data.githubarchive.org/' >> /home/igrigorik/githubarchive.org/crawler/data/sync.log 2>&1
+5 * * * * /bin/bash -l -c 'cd /home/igrigorik/githubarchive.org/crawler/data && gzip -9 `date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json && gsutil -h "Content-Type: application/x-gzip" cp -a public-read `date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json.gz gs://data.githubarchive.org/' >> /home/igrigorik/githubarchive.org/crawler/data/sync.log 2>&1
 
 # import data into bigquery
 8 * * * * /bin/bash -l -c 'cd /home/igrigorik/githubarchive.org/bigquery     && ruby upload.rb -i ../crawler/data/`date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json.gz' >> /home/igrigorik/githubarchive.org/crawler/data/sync.log 2>&1
