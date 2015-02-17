@@ -98,5 +98,6 @@ _Note: you get [1 TB of data processed per month free of charge](https://cloud.g
 * [Exploring Expressions of Emotions in GitHub Commit Messages](http://geeksta.net/geeklog/exploring-expressions-emotions-github-commit-messages/)
 * [Language Use on GitHub](http://datahackermd.com/2013/language-use-on-github/) visualization of the rank correlation between languages.
 * [The Top 11 Hottest GitHub Projects Right Now](http://www.fastcolabs.com/3015178/the-top-10-hottest-github-projects-right-now?partner=rss)
+* [Ask GitHub](http://askgithub.com) - search latest GitHub timeline</li>
 
 _P.S. Have a cool project? Update the readme, send a pull request!_
