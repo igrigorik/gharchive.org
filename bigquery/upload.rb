@@ -70,7 +70,7 @@ begin
 
   # upload the data to BigQuery
   table = "day.events_" + Time.parse(options[:input]).strftime("%Y%m%d")
-  newtable = `bq show #{table}`.include? 'Not Found'
+  newtable = `bq show #{table}`.downcase.include? 'error'
 
   status = system(
         "bq load --source_format NEWLINE_DELIMITED_JSON " +
