@@ -1,6 +1,6 @@
 [
     {
-      "origin": ["https://data.githubarchive.org"],
+      "origin": ["*"],
       "responseHeader": ["Content-Type"],
       "method": ["GET", "HEAD"],
       "maxAgeSeconds": 86400
