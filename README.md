@@ -92,7 +92,6 @@ _Note: you get [1 TB of data processed per month free of charge](https://cloud.g
 * GitHub Data Challenge: [2012](https://github.com/blog/1162-github-data-challenge-winners), [2013](https://github.com/blog/1544-data-challenge-ii-results), and [2014 winners](https://github.com/blog/1892-third-annual-data-challenge-winners).
 * [Analyzing Millions of GitHub Commits (Strata talk)](https://www.youtube.com/watch?v=U_LNo_cSc70)
 * [GitHut](http://githut.info/) is an attempt to visualize and explore the complexity of the universe of programming languages used across the repositories hosted on GitHub.
-* [Octoboard](http://octoboard.com/) is a GitHub activity dashboard.
 * [Who speaks what on GitHub?](http://danielvdende.com/gdc2014/) Three visualizations provide insight into the language skills of users on GitHub.
 * [GitHub in 2013](http://blog.coderstats.net/github/2013/event-types/) is a brief visual overview of GitHub event types in 2013.
 * [Exploring Expressions of Emotions in GitHub Commit Messages](http://geeksta.net/geeklog/exploring-expressions-emotions-github-commit-messages/)
