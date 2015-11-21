@@ -51,9 +51,9 @@ end
 * Activity archives for dates starting 1/1/2015 is recorded from the Events API.
 
 
-### Analyzing event data with BigQuery 
+### Analyzing event data with BigQuery
 
-The entire GitHub Archive is also available as a public dataset on [Google BigQuery](https://developers.google.com/bigquery/): the dataset is automatically updated every hour and enables you to run [arbitrary SQL-like queries](https://developers.google.com/bigquery/docs/query-reference) over the entire dataset in seconds - i.e. no need to download or process any data on your own. To get started: 
+The entire GitHub Archive is also available as a public dataset on [Google BigQuery](https://developers.google.com/bigquery/): the dataset is automatically updated every hour and enables you to run [arbitrary SQL-like queries](https://developers.google.com/bigquery/docs/query-reference) over the entire dataset in seconds - i.e. no need to download or process any data on your own. To get started:
 
 1. If you don't already have a Google project...
  * [Login into the Google Developer Console](https://console.developers.google.com/)
@@ -65,17 +65,17 @@ The entire GitHub Archive is also available as a public dataset on [Google BigQu
 /* count of issues opened, closed, and reopened between 1/1/2015 and 2/1/2015 */
 SELECT event as issue_status, COUNT(*) as cnt FROM (
   SELECT type, repo.name, actor.login,
-    JSON_EXTRACT(payload, '$.action') as event, 
-  FROM (TABLE_DATE_RANGE(github.events_, 
-    TIMESTAMP('2015-01-01'), 
+    JSON_EXTRACT(payload, '$.action') as event,
+  FROM (TABLE_DATE_RANGE(github.events_,
+    TIMESTAMP('2015-01-01'),
     TIMESTAMP('2015-02-01')
-  )) 
+  ))
   WHERE type = 'IssuesEvent'
 )
 GROUP by issue_status;
 ```
 
-Note that the public dataset contains several types of tables: 
+Note that the public dataset contains several types of tables:
 
 * `2011`, `2012`, `2013`, and `2014` tables contain activities for each respective year
   * The schema is in a "flattened" format where each field is mapped into a distinct column
@@ -83,11 +83,27 @@ Note that the public dataset contains several types of tables:
 * `events_YYYYMMDD` tables contain daily activity starting from 1/1/2015
   * The schema contains distinct columns for common activity fields (see "[same response format](https://developer.github.com/v3/activity/events/)"), plus a `payload` string field which contains the JSON encoded activity description. The format of the `payload` is different for each type and may be updated by GitHub at any point, hence it is kept as a string value in BigQuery. However, you **can** extract particular fields from the `payload` using the provided [JSON functions](https://cloud.google.com/bigquery/query-reference#jsonfunctions) - e.g. see query example above with `JSON_EXTRACT()`.
 
-Starting 1/1/2015 the data is split into daily tables to allow for more efficient processing. Note that you can still run queries that span multiple tables using a [table wildcard](https://cloud.google.com/bigquery/query-reference#tablewildcardfunctions) - e.g. see example above with `TABLE_DATE_RANGE()`. 
+Starting 1/1/2015 the data is split into daily tables to allow for more efficient processing. Note that you can still run queries that span multiple tables using a [table wildcard](https://cloud.google.com/bigquery/query-reference#tablewildcardfunctions) - e.g. see example above with `TABLE_DATE_RANGE()`.
 
 _Note: you get [1 TB of data processed per month free of charge](https://cloud.google.com/bigquery/pricing#queries), use it wisely!_
 
-### Research, visualizations, talks... 
+### Changelog Nightly
+
+Changelog Nightly is the new and improved GitHub Archive daily email reports.
+
+Ships every night at 10pm CT -- and unearths the hottest new repos on GitHub before they blow up. It's nerd to the core and in your inbox each night.
+
+[Listen to episode #144 of The Changelog](http://thechangelog.com/144/) for an in-depth interview with Ilya Grigorik about the history of GitHub Archive, logging and archiving GitHub’s public event data with Google BigQuery, and all the details of The Changelog taking over the GitHub Archive daily email reports.
+
+[![Changelog Weekly](assets/img/subscribe-changelog-nightly.png)](http://thechangelog.com/nightly)
+
+Here's a preview:
+
+![changelog-nightly](assets/img/changelog-nightly-feb25.png)
+
+If you want something curated and less frequent, subscribe to [Changelog Weekly](http://thechangelog.com/weekly).
+
+### Research, visualizations, talks...
 
 * GitHub Data Challenge: [2012](https://github.com/blog/1162-github-data-challenge-winners), [2013](https://github.com/blog/1544-data-challenge-ii-results), and [2014 winners](https://github.com/blog/1892-third-annual-data-challenge-winners).
 * [Analyzing Millions of GitHub Commits (Strata talk)](https://www.youtube.com/watch?v=U_LNo_cSc70)
