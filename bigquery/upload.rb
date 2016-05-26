@@ -51,6 +51,7 @@ begin
   Yajl::Parser.parse(js) do |event|
     event['payload'] = Yajl::Encoder.encode(event.delete('payload'))
     event['created_at'] = Time.parse(event['created_at']).utc.strftime('%Y-%m-%d %T')
+    event['actor'].delete('display_login')
 
     encoded = Yajl::Encoder.encode(event)
 
