@@ -34,6 +34,13 @@ EM.run do
 
   @latest = []
   @latest_key = lambda { |e| "#{e['id']}" }
+  @clean = lambda do |h|
+    h.delete('email')
+    h.each_value do |v|
+      @clean.call(v) if v.is_a? Hash
+      v.each {|e| @clean.call(e)} if v.is_a? Array
+    end
+  end
 
   process = Proc.new do
       req = HttpRequest.new("https://api.github.com/events?per_page=200", {
@@ -66,7 +73,7 @@ EM.run do
             @file = File.new(archive, "a+")
           end
 
-          @file.puts(Yajl::Encoder.encode(event))
+          @file.puts(Yajl::Encoder.encode(@clean.call(event)))
         end
 
         remaining = req.response_header.raw['X-RateLimit-Remaining']
