@@ -1,5 +1,6 @@
 require 'log4r'
 require 'yajl'
+require 'digest'
 require 'em-http'
 require 'em-stathat'
 
@@ -35,7 +36,10 @@ EM.run do
   @latest = []
   @latest_key = lambda { |e| "#{e['id']}" }
   @clean = lambda do |h|
-    h.delete('email')
+    if email = h.delete('email')
+      name, host = email.split("@")
+      h['email'] = [Digest::SHA1.hexdigest(name), host].compact.join("@")
+    end
     h.each_value do |v|
       @clean.call(v) if v.is_a? Hash
       v.each {|e| @clean.call(e)} if v.is_a? Array
