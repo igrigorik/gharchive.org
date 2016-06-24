@@ -2,7 +2,8 @@ require 'optparse'
 require 'time'
 require 'zlib'
 require 'yajl'
-require 'csv'
+
+require_relative 'transformer'
 
 ARGV << '--help' if ARGV.empty?
 
@@ -49,11 +50,11 @@ begin
   end
 
   Yajl::Parser.parse(js) do |event|
-    event['payload'] = Yajl::Encoder.encode(event.delete('payload'))
-    event['created_at'] = Time.parse(event['created_at']).utc.strftime('%Y-%m-%d %T')
-    event['actor'].delete('display_login')
+    transformer = EventTransform.new(event)
+    transformer.process
+    tranformed_event = transformer.parsed_event
 
-    encoded = Yajl::Encoder.encode(event)
+    encoded = Yajl::Encoder.encode(tranformed_event)
 
     # https://cloud.google.com/bigquery/preparing-data-for-bigquery#dataformats
     if encoded.size > 2*1024*1024
@@ -70,7 +71,7 @@ begin
   puts "\tUploading data to BigQuery..."
 
   # upload the data to BigQuery
-  table = "day.events_" + Time.parse(options[:input]).strftime("%Y%m%d")
+  table = "day." + Time.parse(options[:input]).strftime("%Y%m%d")
   newtable = `bq show #{table}`.downcase.include? 'error'
 
   status = system(
