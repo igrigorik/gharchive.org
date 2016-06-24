@@ -109,5 +109,10 @@
     "name": "id",
     "type": "STRING",
     "description": "Unique event ID"
+  },
+  {
+   "name": "other",
+   "type": "STRING",
+   "description": "Unknown fields in JSON format"
   }
 ]
