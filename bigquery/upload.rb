@@ -75,7 +75,9 @@ begin
   newtable = `bq show #{table}`.downcase.include? 'error'
 
   status = system(
-        "bq load --source_format NEWLINE_DELIMITED_JSON " +
+        "bq load " +
+        "--project_id=githubarchive " +
+        "--source_format NEWLINE_DELIMITED_JSON " +
         "#{table} #{options[:output]} " +
         "#{options[:schema] if newtable}"
       )
