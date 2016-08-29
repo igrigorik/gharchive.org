@@ -12,9 +12,9 @@ For more details, see www.githubarchive.org.
 
 ## Licenses
 
-MIT, for code and documentation in this repository, see `[LICENSE.md](LICENSE.md)`.
+MIT, for code and documentation in this repository, see [LICENSE.md](LICENSE.md).
 
-www.githubarchive.org website content (`gh-pages` branch) is also released under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/), which gives you permission to use the content for almost any purpose but does not grant you any trademark permissions, so long as you note the license and give credit, such as follows:
+www.githubarchive.org website content (gh-pages branch) is also released under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/), which gives you permission to use the content for almost any purpose but does not grant you any trademark permissions, so long as you note the license and give credit, such as follows:
 
 > Content based on
 > <a href="http://www.githubarchive.org/">www.githubarchive.org</a>
