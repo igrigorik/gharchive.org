@@ -10,6 +10,8 @@ include EM
 ## Setup
 ##
 
+PAGE_LIMIT = 200
+
 StatHat.config do |c|
   c.ukey  = ENV['STATHATKEY']
   c.email = 'ilya@igvita.com'
@@ -47,7 +49,7 @@ EM.run do
   end
 
   process = Proc.new do
-      req = HttpRequest.new("https://api.github.com/events?per_page=200", {
+      req = HttpRequest.new("https://api.github.com/events?per_page=#{PAGE_LIMIT}", {
         :inactivity_timeout => 5,
         :connect_timeout => 5
       }).get({
@@ -84,7 +86,7 @@ EM.run do
         reset = Time.at(req.response_header.raw['X-RateLimit-Reset'].to_i)
         @log.info "Found #{new_events.size} new events: #{new_events.collect(&@latest_key)}, API: #{remaining}, reset: #{reset}"
 
-        if new_events.size >= 100
+        if new_events.size >= PAGE_LIMIT
           @log.info "Missed records.."
         end
 
