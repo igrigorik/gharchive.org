@@ -23,7 +23,7 @@ class EventTransform
   end
 
   # Return the event hash as described in
-  # https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js
+  # https://github.com/igrigorik/gharchive.org/blob/master/bigquery/schema.js
   # HACK HACK HACK
   def parsed_event
     event = {
@@ -57,13 +57,13 @@ class EventTransform
     @is_public = raw_event['public']
     @payload = raw_event['payload']
     @id = raw_event['id']
-    # https://github.com/igrigorik/githubarchive.org/blob/c9ae11426e5bcc30fe15617d009dfc602697ecde/bigquery/schema.js#L17-L38
+    # https://github.com/igrigorik/gharchive.org/blob/c9ae11426e5bcc30fe15617d009dfc602697ecde/bigquery/schema.js#L17-L38
     @repo = parse_repo
 
-    # https://github.com/igrigorik/githubarchive.org/blob/c9ae11426e5bcc30fe15617d009dfc602697ecde/bigquery/schema.js#L39-L70
+    # https://github.com/igrigorik/gharchive.org/blob/c9ae11426e5bcc30fe15617d009dfc602697ecde/bigquery/schema.js#L39-L70
     @actor = parse_actor
 
-    # https://github.com/igrigorik/githubarchive.org/blob/c9ae11426e5bcc30fe15617d009dfc602697ecde/bigquery/schema.js#L71-L102
+    # https://github.com/igrigorik/gharchive.org/blob/c9ae11426e5bcc30fe15617d009dfc602697ecde/bigquery/schema.js#L71-L102
     @org = parse_org
 
     @created_at = parse_created_at

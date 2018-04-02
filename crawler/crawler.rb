@@ -54,7 +54,7 @@ EM.run do
         :connect_timeout => 5
       }).get({
       :head => {
-        'user-agent' => 'githubarchive.org',
+        'user-agent' => 'gharchive.org',
         'Authorization' => 'token ' + ENV['GITHUB_TOKEN']
       }
     })
