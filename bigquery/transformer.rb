@@ -188,6 +188,9 @@ class EventTransform
       return Digest::SHA1.hexdigest(email.to_s)
     else
       prefix, domain = email.strip.split('@')
+      # if prefix is an alpha-numeric string of 40 chars: with high
+      # confidence it's a SHA1; don't hash it twice
+      return email if prefix.match?(/^[a-f0-9]{40}$/i)
       return "#{Digest::SHA1.hexdigest(prefix.to_s)}@#{domain}"
     end
   end
