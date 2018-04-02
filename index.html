@@ -2,16 +2,16 @@
 <html lang="en" itemscope itemtype="http://schema.org/Article">
 
   <head>
-    <title>GitHub Archive</title>
+    <title>GH Archive</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta itemprop="name" content="Github Archive">
-    <meta name="description" content="GitHub Archive is a project to record the public GitHub timeline, archive it, and make it easily accessible for further analysis.">
+    <meta itemprop="name" content="GH Archive">
+    <meta name="description" content="GH Archive is a project to record the public GitHub timeline, archive it, and make it easily accessible for further analysis.">
     <meta itemprop="image" content="http://gems.github.com/octocat.png" />
 
-    <link rel="canonical" href="https://www.githubarchive.org/">
+    <link rel="canonical" href="https://www.gharchive.org/">
     <link rel="shortcut icon" href="https://github.com/favicon.ico">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
@@ -31,12 +31,12 @@
 
       <h1 style="margin-bottom:0.5em">
         <img src="assets/img/github.png" style="vertical-align:middle;padding-right:0.25em" />
-        GitHub <span style="color:#c60000">Archive</span>
+        GH <span style="color:#c60000">Archive</span>
 
         <span style="float:right; margin-top:0.25em">
-          <span style="margin-right:1em"><a class="github-button" href="https://github.com/igrigorik/githubarchive.org" data-count-href="/igrigorik/githubarchive.org/stargazers" data-count-api="/repos/igrigorik/githubarchive.org#stargazers_count">Star</a></span>
-          <g:plusone size="medium" href="http://www.githubarchive.org/"></g:plusone>
-          <a href="https://twitter.com/share" class="twitter-share-button" data-text="GitHub public timeline archive @ " data-url="http://www.githubarchive.org/">Tweet</a>
+          <span style="margin-right:1em"><a class="github-button" href="https://github.com/igrigorik/gharchive.org" data-count-href="/igrigorik/gharchive.org/stargazers" data-count-api="/repos/igrigorik/gharchive.org#stargazers_count">Star</a></span>
+          <g:plusone size="medium" href="http://www.gharchive.org/"></g:plusone>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-text="GitHub public timeline archive @ " data-url="http://www.gharchive.org/">Tweet</a>
         </span>
       </h1>
 
@@ -48,7 +48,7 @@
       <div class="row">
         <div class="span12" >
           <p style="font-size:20px;font-weight:200;line-height:27px;">
-            Open-source developers all over the world are working on millions of projects: writing code &amp; documentation, fixing &amp; submitting bugs, and so forth. GitHub Archive is a project to <strong>record</strong> the public GitHub timeline, <strong>archive it</strong>, and <strong>make it easily accessible</strong> for further analysis.
+            Open-source developers all over the world are working on millions of projects: writing code &amp; documentation, fixing &amp; submitting bugs, and so forth. GH Archive is a project to <strong>record</strong> the public GitHub timeline, <strong>archive it</strong>, and <strong>make it easily accessible</strong> for further analysis.
           </p>
         </div>
       </div>
@@ -69,15 +69,15 @@
             <tbody>
               <tr>
                 <td>Activity for 1/1/2015 @ 3PM UTC</td>
-                <td><code>wget http://data.githubarchive.org/2015-01-01-15.json.gz</code></td>
+                <td><code>wget http://data.gharchive.org/2015-01-01-15.json.gz</code></td>
               </tr>
               <tr>
                 <td>Activity for 1/1/2015</td>
-                <td><code>wget http://data.githubarchive.org/2015-01-01-{0..23}.json.gz</code></td>
+                <td><code>wget http://data.gharchive.org/2015-01-01-{0..23}.json.gz</code></td>
               </tr>
               <tr>
                 <td>Activity for all of January 2015</td>
-                <td><code>wget http://data.githubarchive.org/2015-01-{01..30}-{0..23}.json.gz</code></td>
+                <td><code>wget http://data.gharchive.org/2015-01-{01..30}-{0..23}.json.gz</code></td>
               </tr>
             </tbody>
             </table>
@@ -94,7 +94,7 @@
               <li>Activity archives for dates starting 1/1/2015 is recorded from the Events API.</li>
             </ul>
 
-            <p>For the curious, check out <a href="http://thechangelog.com/144/">The Changelog episode #144</a> for an in-depth interview about the history of GitHub Archive, integration with BigQuery, where the project is heading, and more.</p>
+            <p>For the curious, check out <a href="http://thechangelog.com/144/">The Changelog episode #144</a> for an in-depth interview about the history of GH Archive, integration with BigQuery, where the project is heading, and more.</p>
         </div>
       </div>
 
@@ -104,7 +104,7 @@
           <h2 id="bigquery"><a href="#bigquery">Analyzing event data with BigQuery</a></h2>
           <br/>
 
-          <p>The entire GitHub Archive is also available as a public dataset on <a href="https://developers.google.com/bigquery/">Google BigQuery</a>: the dataset is automatically updated every hour and enables you to run <a href="https://developers.google.com/bigquery/docs/query-reference">arbitrary SQL-like queries</a> over the entire dataset in seconds. To get started:</p>
+          <p>The entire GH Archive is also available as a public dataset on <a href="https://developers.google.com/bigquery/">Google BigQuery</a>: the dataset is automatically updated every hour and enables you to run <a href="https://developers.google.com/bigquery/docs/query-reference">arbitrary SQL-like queries</a> over the entire dataset in seconds. To get started:</p>
 
           <ol>
             <li>If you don't already have a Google project...</li>
@@ -132,7 +132,7 @@
             <li><strong>day dataset:</strong> contains activity for each day  - e.g. <code><a href="https://bigquery.cloud.google.com/table/githubarchive:day.20150101">20150101</a></code>.</li>
           </ol>
 
-          <p>The <a href="https://github.com/igrigorik/githubarchive.org/blob/master/bigquery/schema.js">schema of above datasets</a> contains distinct columns for common activity fields (see <a href="https://developer.github.com/v3/activity/events/">same response format</a>), a <code>"payload"</code> string field which contains the JSON encoded activity description, and <code>"other"</code> string field containing all other fields.</p>
+          <p>The <a href="https://github.com/igrigorik/gharchive.org/blob/master/bigquery/schema.js">schema of above datasets</a> contains distinct columns for common activity fields (see <a href="https://developer.github.com/v3/activity/events/">same response format</a>), a <code>"payload"</code> string field which contains the JSON encoded activity description, and <code>"other"</code> string field containing all other fields.</p>
           <ul>
             <li>The content of the <code>"payload"</code> field is different for each event type and may be updated by GitHub at any point, hence it is kept as a serialized JSON string value in BigQuery. Use the provided <a href="https://cloud.google.com/bigquery/query-reference#jsonfunctions">JSON functions</a> (e.g. see query example above with <code>JSON_EXTRACT()</code>) to extract and access data in this field.</li>
             <li>The content of the <code>"other"</code> field is a JSON string which contains all other data provided but GitHub that does not match the predefined BigQuery schema - e.g. if GitHub adds a new field, it will show up in "other" until and unless the schema is extended to support it.</li>
@@ -152,7 +152,7 @@
           <h2 id="daily-reports"><a href="#daily-reports">Daily reports</a></h2>
           <br/>
 
-          <p><a href="https://changelog.com/nightly">Changelog Nightly</a> is the new and improved version of the daily email reports powered by the Github Archive data. These reports ship each day at 10pm CT and unearth the hottest new repos on GitHub. Alternatively, if you want something curated and less frequent, subscribe to <a href="https://changelog.com/weekly">Changelog Weekly</a>.</p>
+          <p><a href="https://changelog.com/nightly">Changelog Nightly</a> is the new and improved version of the daily email reports powered by the GH Archive data. These reports ship each day at 10pm CT and unearth the hottest new repos on GitHub. Alternatively, if you want something curated and less frequent, subscribe to <a href="https://changelog.com/weekly">Changelog Weekly</a>.</p>
         </div>
       </div>
 
@@ -176,7 +176,7 @@
             <li><a href="http://geeksta.net/geeklog/exploring-expressions-emotions-github-commit-messages/">Exploring Expressions of Emotions in GitHub Commit Messages</a></li>
             <li><a href="http://www.fastcolabs.com/3015178/the-top-10-hottest-github-projects-right-now?partner=rss">The Top 11 Hottest GitHub Projects Right Now</a></li>
             <li><a href="http://www.gitlogs.com/">GitLogs</a> - Github Daily Newsletter curated with a peak detection algorithm. Also a sexy interface to search topics and trends on Github</li>
-            <li><a href="https://changelog.com/nightly/">Subscribe to Changelog Nightly</a> (the new and improved GitHub Archive daily email reports). It ships every night at 10pm CT &mdash; and unearths the hottest new repos on GitHub before they blow up. It's nerd to the core and in your inbox each night.</li>
+            <li><a href="https://changelog.com/nightly/">Subscribe to Changelog Nightly</a> (the new and improved GH Archive daily email reports). It ships every night at 10pm CT &mdash; and unearths the hottest new repos on GitHub before they blow up. It's nerd to the core and in your inbox each night.</li>
             <li><a href="http://askgithub.com">Ask GitHub</a> - search latest GitHub timeline</li>
             <li><a href="https://github.com/neonichu/githop">GitHop</a> - see your contributions from a year ago.</li>
             <li><a href="http://gitmostwanted.com/">GitMostWanted</a> - Advanced explorer of github.com.</li>
@@ -189,7 +189,7 @@
             <li><a href="https://github.com/vitalets/github-trending-repos">GitHub Trending Repos</a> - Stay notified about new trending repositories in your favorite programming language via GitHub notifications.</li>
           </ul>
 
-          <p>Have a cool project that should be on this list? <a href="https://github.com/igrigorik/githubarchive.org/tree/gh-pages">Send a pull request</a>!</p>
+          <p>Have a cool project that should be on this list? <a href="https://github.com/igrigorik/gharchive.org/tree/gh-pages">Send a pull request</a>!</p>
         </div>
       </div>
 
@@ -197,9 +197,9 @@
 
       <footer>
         <p>
-          <a href="https://github.com/igrigorik/githubarchive.org" style="vertical-align:top; margin-right:1em"><strong>igrigorik/githubarchive.org</strong></a>
+          <a href="https://github.com/igrigorik/gharchive.org" style="vertical-align:top; margin-right:1em"><strong>igrigorik/gharchive.org</strong></a>
           <span style="float:right;">
-            <a class="github-button" href="https://github.com/igrigorik/githubarchive.org" data-count-href="/igrigorik/githubarchive.org/stargazers" data-style="mega" data-count-api="/repos/igrigorik/githubarchive.org#stargazers_count">Star</a>
+            <a class="GitHub-button" href="https://github.com/igrigorik/gharchive.org" data-count-href="/igrigorik/gharchive.org/stargazers" data-style="mega" data-count-api="/repos/igrigorik/gharchive.org#stargazers_count">Star</a>
           </span>
         </p>
       </footer>
