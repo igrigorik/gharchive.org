@@ -96,7 +96,7 @@ EM.run do
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
         @log.error "Response: #{req.response_header}, #{req.response}"
       ensure
-        EM.add_timer(1.5, &process)
+        EM.add_timer(0.75, &process)
       end
     end
 
@@ -105,7 +105,7 @@ EM.run do
                   header: #{req.response_header}, \
                   response: #{req.response}"
 
-      EM.add_timer(1.5, &process)
+      EM.add_timer(0.75, &process)
     end
   end
 
