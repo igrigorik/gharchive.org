@@ -22,6 +22,11 @@ end
   :formatter => Log4r::PatternFormatter.new(:pattern => "[#{Process.pid}:%l] %d :: %m")
 }))
 
+if !ENV['GITHUB_TOKEN']
+  @log.error "No GITHUB_TOKEN environment variable defined."
+  raise "No GITHUB_TOKEN environment variable defined."
+end
+
 ##
 ## Crawler
 ##
