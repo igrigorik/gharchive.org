@@ -6,6 +6,16 @@ For details on how to fetch the archived data, see www.gharchive.org.
 
 ## Install
 
+You may need to install openssl to install eventmachine correctly.
+
+```sh
+sudo apt-get install openssl-dev
+OR
+sudo dnf install openssl-devel
+```
+
+Then you can install the ruby gems like so:
+
 ```sh
 gem install bundler:1.16.1
 bundle install
