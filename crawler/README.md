@@ -6,7 +6,13 @@ For details on how to fetch the archived data, see www.gharchive.org.
 
 ## Install
 
-```
+```sh
 gem install bundler:1.16.1
 bundle install
+```
+
+## Run Crawler
+
+```sh
+bundle exec ruby crawler.rb
 ```
