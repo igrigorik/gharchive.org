@@ -93,8 +93,10 @@ EM.run do
         StatHat.new.ez_count('Github Events', new_events.size)
 
       rescue Exception => e
+        @log.error "Failed to process response"
+        @log.error "Response: #{req.response}"
+        @log.error "Response headers: #{req.response_header}"
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
-        @log.error "Response: #{req.response_header}, #{req.response}"
       ensure
         EM.add_timer(0.75, &process)
       end
