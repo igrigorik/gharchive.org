@@ -1,0 +1,11 @@
+# [Hourly at 5 minutes past] sync data to cloud storage
+5 * * * * /bin/bash -l -c 'cd /home/igrigorik/githubarchive.org/crawler/data && gzip -9 `date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json && gsutil -h "Content-Type: application/gzip" cp -a public-read `date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json.gz gs://data.gharchive.org/' >> /home/igrigorik/githubarchive.org/crawler/data/sync.log 2>&1
+
+# [Hourly at 8 minutes past] import data into bigquery
+8 * * * * /bin/bash -l -c 'cd /home/igrigorik/githubarchive.org/bigquery     && ruby upload.rb -i ../crawler/data/`date +"\%Y-\%m-\%d-\%-k" -d "1 hour ago"`.json.gz' >> /home/igrigorik/githubarchive.org/crawler/data/sync.log 2>&1
+
+# [Daily at 00:10] append daily results to monthly rollup
+10 0 * * * /bin/bash -l -c 'bq query --append_table --allow_large_results --noflatten_results --destination_table=month.`date +"\%Y\%m" -d"1 day ago"` "SELECT * FROM [githubarchive:day.`date +"\%Y\%m\%d" -d"1 day ago"`]"' >> /home/igrigorik/githubarchive.org/crawler/data/append.log 2>&1
+
+# [Daily at 00:00] keep last 365 days worth of data
+0 0 * * * find /home/igrigorik/githubarchive.org/crawler/data/*json* -mtime +365 -exec rm {} \;
