@@ -22,6 +22,19 @@ end
   :formatter => Log4r::PatternFormatter.new(:pattern => "[#{Process.pid}:%l] %d :: %m")
 }))
 
+@tokens = ENV['GITHUB_TOKEN'].split(',')
+@tokenIdx = 0
+
+def get_token ()
+  idx = @tokenIdx
+  token = @tokens[@tokenIdx]
+  @tokenIdx += 1
+  if @tokenIdx >= @tokens.length
+    @tokenIdx = 0
+  end
+  return token, idx
+end
+
 ##
 ## Crawler
 ##
@@ -49,13 +62,14 @@ EM.run do
   end
 
   process = Proc.new do
-      req = HttpRequest.new("https://api.github.com/events?per_page=#{PAGE_LIMIT}", {
+    t, idx = get_token()
+    req = HttpRequest.new("https://api.github.com/events?per_page=#{PAGE_LIMIT}", {
         :inactivity_timeout => 5,
         :connect_timeout => 5
       }).get({
       :head => {
         'user-agent' => 'gharchive.org',
-        'Authorization' => 'token ' + ENV['GITHUB_TOKEN']
+        'Authorization' => 'token ' + t
       }
     })
 
@@ -84,13 +98,17 @@ EM.run do
 
         remaining = req.response_header.raw['X-RateLimit-Remaining']
         reset = Time.at(req.response_header.raw['X-RateLimit-Reset'].to_i)
+
+        # TODO: Update the token mapping with remaining and reset
+        # this can be used to change token as necessary
+
         @log.info "Found #{new_events.size} new events: #{new_events.collect(&@latest_key)}, API: #{remaining}, reset: #{reset}"
 
         if new_events.size >= PAGE_LIMIT
           @log.info "Missed records.."
         end
 
-        StatHat.new.ez_count('Github Events', new_events.size)
+        # StatHat.new.ez_count('Github Events', new_events.size)
 
       rescue Exception => e
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
