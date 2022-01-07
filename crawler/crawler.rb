@@ -108,7 +108,7 @@ EM.run do
           @log.info "Missed records.."
         end
 
-        # StatHat.new.ez_count('Github Events', new_events.size)
+        StatHat.new.ez_count('Github Events', new_events.size)
 
       rescue Exception => e
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
