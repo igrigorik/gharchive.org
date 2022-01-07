@@ -22,6 +22,11 @@ end
   :formatter => Log4r::PatternFormatter.new(:pattern => "[#{Process.pid}:%l] %d :: %m")
 }))
 
+if !ENV['GITHUB_TOKEN']
+  @log.error "No GITHUB_TOKEN environment variable defined."
+  raise "No GITHUB_TOKEN environment variable defined."
+end
+
 @tokens = ENV['GITHUB_TOKEN'].split(',')
 @tokenIdx = 0
 
@@ -111,8 +116,10 @@ EM.run do
         StatHat.new.ez_count('Github Events', new_events.size)
 
       rescue Exception => e
+        @log.error "Failed to process response"
+        @log.error "Response: #{req.response}"
+        @log.error "Response headers: #{req.response_header}"
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
-        @log.error "Response: #{req.response_header}, #{req.response}"
       ensure
         EM.add_timer(0.75, &process)
       end
