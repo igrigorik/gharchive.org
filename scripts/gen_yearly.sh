@@ -19,10 +19,3 @@ do
 
   now=`date +"%Y-%m-%d" -d "$now + 1 year"`;
 done
-
-#SELECT
-# *
-#FROM
-#  `githubarchive.month.*`
-#WHERE
-#  _TABLE_SUFFIX BETWEEN '20180101' AND '20190101'
