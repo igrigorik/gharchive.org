@@ -55,7 +55,7 @@ class ObfuscateEmail < Test::Unit::TestCase
         assert_equal want, input, "expect no change"
     end
 
-    def test_no_obfuscation_for_other_files
+    def test_no_obfuscation_for_other_fields
         input = {
             "other" => "example@gharchive.org",
             "array-empty" => [],
