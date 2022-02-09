@@ -4,6 +4,8 @@ require 'digest'
 require 'em-http'
 require 'em-stathat'
 
+require_relative "obfuscate.rb"
+
 include EM
 
 ##
@@ -42,16 +44,6 @@ EM.run do
 
   @latest = []
   @latest_key = lambda { |e| "#{e['id']}" }
-  @clean = lambda do |h|
-    if email = h.delete('email')
-      name, host = email.split("@")
-      h['email'] = [Digest::SHA1.hexdigest(name), host].compact.join("@")
-    end
-    h.each_value do |v|
-      @clean.call(v) if v.is_a? Hash
-      v.each {|e| @clean.call(e)} if v.is_a? Array
-    end
-  end
 
   process = Proc.new do
       req = HttpRequest.new("https://api.github.com/events?per_page=#{PAGE_LIMIT}", {
@@ -84,7 +76,7 @@ EM.run do
             @file = File.new(archive, "a+")
           end
 
-          @file.puts(Yajl::Encoder.encode(@clean.call(event)))
+          @file.puts(Yajl::Encoder.encode(Obfuscate.email(event)))
         end
 
         remaining = req.response_header.raw['X-RateLimit-Remaining']
