@@ -12,7 +12,7 @@ include EM
 ## Setup
 ##
 
-PAGE_LIMIT = 200
+PAGE_LIMIT = 100
 
 StatHat.config do |c|
   c.ukey  = ENV['STATHATKEY']
