@@ -7,5 +7,8 @@
 # [Daily at 00:10] append daily results to monthly rollup
 10 0 * * * /bin/bash -l -c 'bq query --append_table --allow_large_results --noflatten_results --destination_table=month.`date +"\%Y\%m" -d"1 day ago"` "SELECT * FROM [githubarchive:day.`date +"\%Y\%m\%d" -d"1 day ago"`]"' >> /home/igrigorik/githubarchive.org/crawler/data/append.log 2>&1
 
+# [Yearly at 5am on 1st January] Generate the yearly tables
+0  5 1 1 * /bin/bash -l -c 'sh /home/igrigorik/githubarchive.org/scripts/gen_yearly.sh `date +"\%Y" -d"1 year ago"` `date +"\%Y" -d"today"`' >> /home/igrigorik/githubarchive.org/crawler/data/append.log 2>&1
+
 # [Daily at 00:00] keep last 365 days worth of data
 0 0 * * * find /home/igrigorik/githubarchive.org/crawler/data/*json* -mtime +365 -exec rm {} \;
