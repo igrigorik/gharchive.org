@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'eventmachine', :git => 'git://github.com/eventmachine/eventmachine.git'
-gem 'em-http-request', :git => 'git://github.com/igrigorik/em-http-request.git'
+gem 'eventmachine', :git => 'git@github.com:eventmachine/eventmachine.git'
+gem 'em-http-request', :git => 'git@github.com:igrigorik/em-http-request.git'
 
 gem 'yajl-ruby', :require => 'yajl'
 gem 'em-stathat'

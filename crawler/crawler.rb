@@ -16,7 +16,7 @@ PAGE_LIMIT = 100
 
 StatHat.config do |c|
   c.ukey  = ENV['STATHATKEY']
-  c.email = 'ilya@igvita.com'
+  c.email = 'xxx'  ## must specify here?
 end
 
 @log = Log4r::Logger.new('github')
@@ -45,14 +45,21 @@ EM.run do
   @latest = []
   @latest_key = lambda { |e| "#{e['id']}" }
 
+  github_tokens = [ENV['GITHUB_TOKEN']]
+  current_token_index = 0
+
   process = Proc.new do
-      req = HttpRequest.new("https://api.github.com/events?per_page=#{PAGE_LIMIT}", {
+      github_token = github_tokens[current_token_index]
+      current_token_index = (current_token_index + 1) % github_tokens.length
+      @log.info "using github token #{github_token}"
+      req_url = "https://api.github.com/events?per_page=#{PAGE_LIMIT}"
+      req = HttpRequest.new(req_url, {
         :inactivity_timeout => 5,
         :connect_timeout => 5
       }).get({
       :head => {
         'user-agent' => 'gharchive.org',
-        'Authorization' => 'token ' + ENV['GITHUB_TOKEN']
+        'Authorization' => 'token ' + github_token
       }
     })
 
@@ -83,8 +90,12 @@ EM.run do
         reset = Time.at(req.response_header.raw['X-RateLimit-Reset'].to_i)
         @log.info "Found #{new_events.size} new events: #{new_events.collect(&@latest_key)}, API: #{remaining}, reset: #{reset}"
 
+        ## TODO: how to handle missing events? - lower request timer?
+        @exceed_log_file = File.new("event_exceed.txt", "a+")
         if new_events.size >= PAGE_LIMIT
-          @log.info "Missed records.."
+          @log.info "================== Missed records... =================="
+          ## write to a file, test for 1 hour once
+          @exceed_log_file.puts(Time.now)
         end
 
         StatHat.new.ez_count('Github Events', new_events.size)
@@ -95,7 +106,8 @@ EM.run do
         @log.error "Response headers: #{req.response_header}"
         @log.error "Processing exception: #{e}, #{e.backtrace.first(5)}"
       ensure
-        EM.add_timer(0.75, &process)
+        # 0.75s is for token rate limit?
+        EM.add_timer(0.2, &process)
       end
     end
 
@@ -104,7 +116,7 @@ EM.run do
                   header: #{req.response_header}, \
                   response: #{req.response}"
 
-      EM.add_timer(0.75, &process)
+      EM.add_timer(0.2, &process)
     end
   end
 

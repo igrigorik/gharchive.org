@@ -4,6 +4,7 @@ module Obfuscate
             if h['email'] && !h['email'].empty?
                 email = h.delete('email')
                 name, host = email.split("@")
+                name = name.to_s ## in case name is nil
                 h['email'] = [Digest::SHA1.hexdigest(name), host].compact.join("@")
             end
 

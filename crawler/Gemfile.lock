@@ -1,11 +1,11 @@
 GIT
-  remote: git://github.com/eventmachine/eventmachine.git
+  remote: git@github.com:eventmachine/eventmachine.git
   revision: 98ff494aac2279af2675fd8dd49cc5f130f8b236
   specs:
     eventmachine (1.2.5)
 
 GIT
-  remote: git://github.com/igrigorik/em-http-request.git
+  remote: git@github.com:igrigorik/em-http-request.git
   revision: 6061430336bd1421b25c2244d5b85e4cdfcfb3f7
   specs:
     em-http-request (1.1.5)
