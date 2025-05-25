@@ -4,7 +4,7 @@ require 'digest'
 require 'em-http'
 require 'em-stathat'
 
-require_relative "obfuscate.rb"
+require_relative 'obfuscate.rb'
 
 include EM
 
@@ -12,7 +12,7 @@ include EM
 ## Setup
 ##
 
-PAGE_LIMIT = 100
+PAGE_LIMIT = 500
 
 StatHat.config do |c|
   c.ukey  = ENV['STATHATKEY']
@@ -63,19 +63,22 @@ EM.run do
         new_events = latest.reject {|e| @latest.include? @latest_key.call(e)}
 
         @latest = urls
-        new_events.sort_by {|e| [Time.parse(e['created_at']), e['id']] }.each do |event|
-          timestamp = Time.parse(event['created_at']).strftime('%Y-%m-%d-%-k')
-          archive = "data/#{timestamp}.json"
 
-          if @file.nil? || (archive != @file.to_path)
-            if !@file.nil?
-              @log.info "Rotating archive. Current: #{@file.to_path}, New: #{archive}"
-              @file.close
-            end
+        # Determine archive filename based on current time, before processing events
+        current_processing_time = Time.now
+        timestamp = current_processing_time.strftime('%Y-%m-%d-%-k')
+        archive = "data/#{timestamp}.json"
 
-            @file = File.new(archive, "a+")
+        # Open or rotate file based on the current time's archive path
+        if @file.nil? || (archive != @file.to_path)
+          if !@file.nil?
+            @log.info "Rotating archive. Current: #{@file.to_path}, New: #{archive}"
+            @file.close
           end
+          @file = File.new(archive, "a+")
+        end
 
+        new_events.each do |event|
           @file.puts(Yajl::Encoder.encode(Obfuscate.email(event)))
         end
 
